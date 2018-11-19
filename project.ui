@@ -1,0 +1,971 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>dlgProject</class>
+ <widget class="QDialog" name="dlgProject">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1121</width>
+    <height>973</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Novo Projeto</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>logo.png</normaloff>logo.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(38, 38, 38);
+color: rgb(242, 242, 242);</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_7">
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_6">
+     <item>
+      <widget class="QTabWidget" name="tabProject">
+       <property name="styleSheet">
+        <string notr="true">QTabBar::tab  {
+    background: rgb(38, 38, 38);
+    border: 1px solid #C4C4C3;
+    border-bottom-color: #C2C7CB; /* same as the pane color */
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    min-width: 8ex;
+    padding: 2px;
+}</string>
+       </property>
+       <property name="currentIndex">
+        <number>0</number>
+       </property>
+       <widget class="QWidget" name="tabInformation">
+        <attribute name="title">
+         <string>Informação</string>
+        </attribute>
+        <layout class="QFormLayout" name="formLayout">
+         <item row="0" column="0" colspan="2">
+          <widget class="QLabel" name="label">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(242, 242, 242);</string>
+           </property>
+           <property name="text">
+            <string>Nome Projeto</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="leProjectName">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(242, 242, 242);</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0" colspan="2">
+          <widget class="QLabel" name="lbProjectFilePath">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(242, 242, 242);</string>
+           </property>
+           <property name="text">
+            <string>Caminho do arquivo de projeto:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_7">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(242, 242, 242);</string>
+           </property>
+           <property name="text">
+            <string>Data</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QDateTimeEdit" name="dteDate">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(242, 242, 242);</string>
+           </property>
+           <property name="displayFormat">
+            <string>dd/MM/yyyy hh:mm:ss</string>
+           </property>
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0" colspan="2">
+          <widget class="QLabel" name="label_6">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(242, 242, 242);</string>
+           </property>
+           <property name="text">
+            <string>Descrição</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="1">
+          <widget class="QPlainTextEdit" name="teDescription">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(242, 242, 242);</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="0" colspan="2">
+          <widget class="QLabel" name="lbTimeFormat">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(242, 242, 242);</string>
+           </property>
+           <property name="text">
+            <string>Formato da hora:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="1">
+          <widget class="QRadioButton" name="rbSeconds">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(242, 242, 242);</string>
+           </property>
+           <property name="text">
+            <string>segundos</string>
+           </property>
+           <property name="checked">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="1">
+          <widget class="QRadioButton" name="rbHMS">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(242, 242, 242);</string>
+           </property>
+           <property name="text">
+            <string>hh:mm:ss.mss</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tabConfiguration">
+        <attribute name="title">
+         <string>Ethogram</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_10">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_5">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_11">
+             <item>
+              <widget class="QTableWidget" name="twBehaviors">
+               <property name="autoFillBackground">
+                <bool>false</bool>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QTableWidget::item {
+  selection-background-color: rgb(89, 89, 89);
+  selection-color: rgb(242, 242, 242);
+}
+
+QTableWidget::item:selected{
+	selection-background-color: rgb(89, 89, 89);
+    selection-color: rgb(242, 242, 242); 
+}
+
+QHeaderView::section
+{
+  background-color: rgb(89, 89, 89);
+  color: rgb(242, 242, 242);
+}
+
+QTableWidget QListWidget {
+	background-color: rgb(38, 38, 38);
+	color: rgb(242, 242, 242);
+}</string>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Sunken</enum>
+               </property>
+               <property name="midLineWidth">
+                <number>0</number>
+               </property>
+               <property name="alternatingRowColors">
+                <bool>false</bool>
+               </property>
+               <property name="selectionMode">
+                <enum>QAbstractItemView::SingleSelection</enum>
+               </property>
+               <property name="selectionBehavior">
+                <enum>QAbstractItemView::SelectRows</enum>
+               </property>
+               <property name="sortingEnabled">
+                <bool>false</bool>
+               </property>
+               <property name="wordWrap">
+                <bool>false</bool>
+               </property>
+               <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+                <bool>false</bool>
+               </attribute>
+               <attribute name="verticalHeaderShowSortIndicator" stdset="0">
+                <bool>false</bool>
+               </attribute>
+               <column>
+                <property name="text">
+                 <string>Tipo Comportamento</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Atalho</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Observação</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Barreiras</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Modificadores</string>
+                </property>
+               </column>
+              </widget>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_11">
+               <item>
+                <widget class="QPushButton" name="pbAddBehavior">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(13, 13, 13);</string>
+                 </property>
+                 <property name="text">
+                  <string>Adicionar comportamento</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pbCloneBehavior">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(13, 13, 13);</string>
+                 </property>
+                 <property name="text">
+                  <string>Copiar comportamento</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pbRemoveBehavior">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(13, 13, 13);</string>
+                 </property>
+                 <property name="text">
+                  <string>Remover comportamento</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pbRemoveAllBehaviors">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(13, 13, 13);</string>
+                 </property>
+                 <property name="text">
+                  <string>Remova todos
+os comportamentos</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pbBehaviorsCategories">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(13, 13, 13);</string>
+                 </property>
+                 <property name="text">
+                  <string>Adicionar novas barreiras</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_3">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pbImportBehaviorsFromProject">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(13, 13, 13);</string>
+                 </property>
+                 <property name="text">
+                  <string>Importar comportamentos
+de um projeto eMOC</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pbImportFromTextFile">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(13, 13, 13);</string>
+                 </property>
+                 <property name="text">
+                  <string>Importar de
+arquivo de texto</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pbExportEthogram">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(13, 13, 13);</string>
+                 </property>
+                 <property name="text">
+                  <string>Exportar Etograma</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QLabel" name="lbObservationsState">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tabSubjects">
+        <attribute name="title">
+         <string>Sujeitos</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_16">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_14">
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_12">
+             <item>
+              <widget class="QTableWidget" name="twSubjects">
+               <property name="autoFillBackground">
+                <bool>false</bool>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QTableWidget::item {
+  selection-background-color:rgb(38, 38, 38);
+  selection-color: rgb(242, 242, 242);
+}
+
+QTableWidget::item:selected{
+	selection-background-color:rgb(89, 89, 89);
+    selection-color: rgb(242, 242, 242); 
+}
+
+QHeaderView::section
+{
+  background-color: rgb(89, 89, 89);
+  color: rgb(242, 242, 242);
+}
+
+QTableWidget QListWidget {
+	background-color: rgb(38, 38, 38);
+	color: rgb(242, 242, 242);
+}</string>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Sunken</enum>
+               </property>
+               <property name="midLineWidth">
+                <number>0</number>
+               </property>
+               <property name="selectionMode">
+                <enum>QAbstractItemView::SingleSelection</enum>
+               </property>
+               <property name="selectionBehavior">
+                <enum>QAbstractItemView::SelectRows</enum>
+               </property>
+               <property name="sortingEnabled">
+                <bool>true</bool>
+               </property>
+               <column>
+                <property name="text">
+                 <string>Chave</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Nome sujeito</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Descrição</string>
+                </property>
+               </column>
+              </widget>
+             </item>
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_15">
+               <item>
+                <widget class="QPushButton" name="pbAddSubject">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(13, 13, 13);</string>
+                 </property>
+                 <property name="text">
+                  <string>Adicionar sujeito</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pbRemoveSubject">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(13, 13, 13);</string>
+                 </property>
+                 <property name="text">
+                  <string>Remover sujeito</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pbImportSubjectsFromProject">
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(13, 13, 13);</string>
+                 </property>
+                 <property name="text">
+                  <string>Importar sujetos
+de um projeto eMOC</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="verticalSpacer_2">
+                 <property name="orientation">
+                  <enum>Qt::Vertical</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>40</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QLabel" name="lbSubjectsState">
+             <property name="text">
+              <string>TextLabel</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tabIndependentVariables">
+        <attribute name="title">
+         <string>Variáveis independentes </string>
+        </attribute>
+        <layout class="QHBoxLayout" name="horizontalLayout_14">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_13">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <item>
+              <widget class="QTableWidget" name="twVariables">
+               <property name="autoFillBackground">
+                <bool>false</bool>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">QTableWidget::item {
+  selection-background-color: rgb(89, 89, 89);
+  selection-color: rgb(242, 242, 242);
+}
+
+QTableWidget::item:selected{
+	selection-background-color: rgb(89, 89, 89);
+    selection-color: rgb(242, 242, 242); 
+}
+
+QHeaderView::section
+{
+  background-color: rgb(89, 89, 89);
+  color: rgb(242, 242, 242);
+}
+
+QTableWidget QListWidget {
+	background-color: rgb(38, 38, 38);
+	color: rgb(242, 242, 242);
+}</string>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Sunken</enum>
+               </property>
+               <property name="midLineWidth">
+                <number>0</number>
+               </property>
+               <property name="editTriggers">
+                <set>QAbstractItemView::NoEditTriggers</set>
+               </property>
+               <property name="dragDropOverwriteMode">
+                <bool>false</bool>
+               </property>
+               <property name="alternatingRowColors">
+                <bool>true</bool>
+               </property>
+               <property name="selectionMode">
+                <enum>QAbstractItemView::SingleSelection</enum>
+               </property>
+               <property name="selectionBehavior">
+                <enum>QAbstractItemView::SelectRows</enum>
+               </property>
+               <property name="sortingEnabled">
+                <bool>true</bool>
+               </property>
+               <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+                <bool>true</bool>
+               </attribute>
+               <column>
+                <property name="text">
+                 <string>Rótulo</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Descrição</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Tipo</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Valor predefinido</string>
+                </property>
+               </column>
+               <column>
+                <property name="text">
+                 <string>Conjunto de valores</string>
+                </property>
+               </column>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
+               <item>
+                <widget class="QLabel" name="label_2">
+                 <property name="minimumSize">
+                  <size>
+                   <width>120</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(38, 38, 38);</string>
+                 </property>
+                 <property name="text">
+                  <string>Rótulo</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="leLabel"/>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_3">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_5">
+               <item>
+                <widget class="QLabel" name="label_3">
+                 <property name="minimumSize">
+                  <size>
+                   <width>120</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(38, 38, 38);</string>
+                 </property>
+                 <property name="text">
+                  <string>Descrição</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="leDescription"/>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_4">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_6">
+               <item>
+                <widget class="QLabel" name="label_8">
+                 <property name="minimumSize">
+                  <size>
+                   <width>120</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(38, 38, 38);</string>
+                 </property>
+                 <property name="text">
+                  <string>Tipo</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="cbType">
+                 <property name="minimumSize">
+                  <size>
+                   <width>120</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_5">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_7">
+               <item>
+                <widget class="QLabel" name="label_4">
+                 <property name="minimumSize">
+                  <size>
+                   <width>120</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(38, 38, 38);</string>
+                 </property>
+                 <property name="text">
+                  <string>Valor predefinido</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="lePredefined"/>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_6">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_8">
+               <item>
+                <widget class="QLabel" name="label_9">
+                 <property name="minimumSize">
+                  <size>
+                   <width>120</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">background-color: rgb(38, 38, 38);</string>
+                 </property>
+                 <property name="text">
+                  <string>Data predefinida</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDateTimeEdit" name="dte_default_date">
+                 <property name="displayFormat">
+                  <string>dd/mm/yyyy hh:mm</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_7">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_9">
+               <item>
+                <widget class="QLabel" name="label_5">
+                 <property name="text">
+                  <string>Conjunto de valores (separados por vírgula)</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="leSetValues"/>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_8">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Minimum</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_12">
+             <item>
+              <widget class="QPushButton" name="pbAddVariable">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(13, 13, 13);</string>
+               </property>
+               <property name="text">
+                <string>Adicionar variável</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pbRemoveVariable">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(13, 13, 13);</string>
+               </property>
+               <property name="text">
+                <string>Remover variável</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pbImportVarFromProject">
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(13, 13, 13);</string>
+               </property>
+               <property name="text">
+                <string>Importar variavéis
+de um projeto eMOC</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_4">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="tabObservations">
+        <attribute name="title">
+         <string>Observações</string>
+        </attribute>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QTableWidget" name="twObservations">
+             <property name="styleSheet">
+              <string notr="true">QTableWidget::item {
+  selection-background-color: rgb(89, 89, 89);
+  selection-color: rgb(242, 242, 242);
+}
+
+QTableWidget::item:selected{
+	selection-background-color: rgb(89, 89, 89);
+    selection-color: rgb(242, 242, 242); 
+}
+
+QHeaderView::section
+{
+  background-color: rgb(89, 89, 89);
+  color: rgb(242, 242, 242);
+}
+
+QTableWidget QListWidget {
+	background-color: rgb(38, 38, 38);
+	color: rgb(242, 242, 242);
+}</string>
+             </property>
+             <property name="editTriggers">
+              <set>QAbstractItemView::NoEditTriggers</set>
+             </property>
+             <property name="dragDropOverwriteMode">
+              <bool>false</bool>
+             </property>
+             <property name="selectionMode">
+              <enum>QAbstractItemView::MultiSelection</enum>
+             </property>
+             <property name="selectionBehavior">
+              <enum>QAbstractItemView::SelectRows</enum>
+             </property>
+             <column>
+              <property name="text">
+               <string>id</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Data</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Descrição</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Mídia</string>
+              </property>
+             </column>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pbRemoveObservation">
+             <property name="text">
+              <string>Remover observações selecionadas</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pbCancel">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(13, 13, 13);</string>
+         </property>
+         <property name="text">
+          <string>Cancelar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pbOK">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(13, 13, 13);</string>
+         </property>
+         <property name="text">
+          <string>OK</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
