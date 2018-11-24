@@ -67,7 +67,7 @@ from config import *
 import qrc_eMOC
 from time_budget_widget import timeBudgetResults
 import select_modifiers
-import behaviors_coding_map
+#import behaviors_coding_map
 import plot_events
 import project_functions
 import plot_data_module
@@ -621,7 +621,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.actionShow_spectrogram.triggered.connect(self.show_spectrogram)
         self.actionShow_data_files.triggered.connect(self.show_data_files)
         self.actionDistance.triggered.connect(self.distance)
-        self.actionBehaviors_coding_map.triggered.connect(self.show_behaviors_coding_map)
+        #self.actionBehaviors_coding_map.triggered.connect(self.show_behaviors_coding_map)
 
         self.actionCoding_pad.triggered.connect(self.show_coding_pad)
         self.actionSubjects_pad.triggered.connect(self.show_subjects_pad)
@@ -1808,20 +1808,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                 QMessageBox.NoButton)
             return
 
-        if "behaviors_coding_map" not in self.pj:
-            self.pj["behaviors_coding_map"] = []
-
-        if [bcm for bcm in self.pj["behaviors_coding_map"] if bcm["name"] == behav_coding_map["name"]]:
-            QMessageBox.critical(self, programName, ("The current project already contains a behaviors coding map "
-                                                     "with the same name (<b>{}</b>)").format(behav_coding_map["name"]),
-                                 QMessageBox.Ok | QMessageBox.Default,
-                                 QMessageBox.NoButton)
-            return
-
-        self.pj["behaviors_coding_map"].append(behav_coding_map)
-        QMessageBox.information(self, programName,
-                                "The behaviors coding map <b>{}</b> was added to current project".format(
-                                    behav_coding_map["name"]))
         self.projectChanged = True
 
     def behaviors_coding_map_creator(self):
@@ -3272,7 +3258,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         initialize new observation for VLC
         """
 
-        logging.debug("initialize new observation for VLC")
+        logging.debug("Inicializar nova observação para o VLC")
 
         useMediaFromProjectDirectory = NO
 
@@ -3280,28 +3266,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         ok, msg = project_functions.check_if_media_available(self.pj[OBSERVATIONS][self.observationId],
                                                              self.projectFileName)
         if not ok:
-            '''
-            if self.check_if_media_in_project_directory():
-
-                useMediaFromProjectDirectory = dialog.MessageDialog(programName, ("Media file was/were not found in its/their original path(s) "
-                                                                                  "but in project directory.<br> "
-                                                                                  "Do you want to convert media file paths?"), [YES, NO])
-
-                if useMediaFromProjectDirectory == NO:
-                    QMessageBox.warning(self, programName, ("The observation will be opened in VIEW mode.<br>"
-                                                            "It will not be possible to log events.<br>"
-                                                            "Modify the media path to point an existing media file "
-                                                            "to log events or copy media file in the eMOC project "
-                                                            "directory."),
-                                        QMessageBox.Ok | QMessageBox.Default, QMessageBox.NoButton)
-
-                    self.playerType = VIEWER
-                    self.playMode = ""
-                    self.dwObservations.setVisible(True)
-                    return True
-
-            else:
-            '''
             QMessageBox.critical(self, programName, msg + ("<br><br>The observation will be opened in VIEW mode.<br>"
                                                            "It will not be possible to log events.<br>"
                                                            "Modify the media path to point an existing media file "
@@ -3626,9 +3590,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                                         "columns"],
                                                     self.pj[OBSERVATIONS][self.observationId][PLOT_DATA][idx][
                                                         "substract_first_value"],
-                                                    self.pj[CONVERTERS] if CONVERTERS in self.pj else {},
-                                                    self.pj[OBSERVATIONS][self.observationId][PLOT_DATA][idx][
-                                                        "converters"],
                                                     log_level=logging.getLogger().getEffectiveLevel()
                                                     )
 
@@ -3679,9 +3640,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                                         "columns"],
                                                     self.pj[OBSERVATIONS][self.observationId][PLOT_DATA][idx][
                                                         "substract_first_value"],
-                                                    self.pj[CONVERTERS] if CONVERTERS in self.pj else {},
-                                                    self.pj[OBSERVATIONS][self.observationId][PLOT_DATA][idx][
-                                                        "converters"],
                                                     log_level=logging.getLogger().getEffectiveLevel()
                                                     )
 
@@ -3827,7 +3785,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         observationWindow = observation.Observation(
             self.ffmpeg_cache_dir if self.ffmpeg_cache_dir else tempfile.gettempdir(),
             project_path=self.projectFileName,
-            converters=self.pj[CONVERTERS] if CONVERTERS in self.pj else {},
+            converters= {},
             log_level=logging.getLogger().getEffectiveLevel())
 
         observationWindow.pj = self.pj
@@ -6645,11 +6603,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         load specified project
         """
         self.pj = copy.deepcopy(pj)
-
         memProjectChanged = project_changed
         self.initialize_new_project()
         self.projectChanged = True
         self.projectChanged = memProjectChanged
+        self.load_behaviors_in_twEthogram([self.pj[ETHOGRAM][x][BEHAVIOR_CODE] for x in self.pj[ETHOGRAM]])
         self.load_subjects_in_twSubjects([self.pj[SUBJECTS][x]["name"] for x in self.pj[SUBJECTS]])
         self.projectFileName = str(pathlib.Path(project_path).absolute())
         self.project = True
@@ -6676,7 +6634,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 return
 
         if self.projectChanged:
-            response = dialog.MessageDialog(programName, "O que fazer com o atual projeto não salvo?",
+            response = dialog.MessageDialog(programName, "O que fazer com o projeto atual?",
                                             [SAVE, DISCARD, CANCEL])
 
             if response == SAVE:
@@ -6919,21 +6877,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
                 newProjectWindow.twVariables.resizeColumnsToContents()
 
-            # behaviors coding map
-            if BEHAVIORS_CODING_MAP in newProjectWindow.pj:
-                for bcm in newProjectWindow.pj[BEHAVIORS_CODING_MAP]:
-                    newProjectWindow.twBehavCodingMap.setRowCount(newProjectWindow.twBehavCodingMap.rowCount() + 1)
-                    newProjectWindow.twBehavCodingMap.setItem(newProjectWindow.twBehavCodingMap.rowCount() - 1, 0,
-                                                              QTableWidgetItem(bcm["name"]))
-                    codes = ", ".join([bcm["areas"][idx]["code"] for idx in bcm["areas"]])
-                    newProjectWindow.twBehavCodingMap.setItem(newProjectWindow.twBehavCodingMap.rowCount() - 1, 1,
-                                                              QTableWidgetItem(codes))
-
-            # time converters
-            if CONVERTERS in newProjectWindow.pj:
-                newProjectWindow.converters = newProjectWindow.pj[CONVERTERS]
-                newProjectWindow.load_converters_in_table()
-
         newProjectWindow.dteDate.setDisplayFormat("yyyy-MM-dd hh:mm:ss")
 
         if mode == NEW:
@@ -6965,6 +6908,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             else:
                 # ethogram
                 self.twEthogram.setRowCount(0)
+                self.load_behaviors_in_twEthogram([self.pj[ETHOGRAM][x]["key"] for x in self.pj[ETHOGRAM]])
 
                 # subjects
                 self.load_subjects_in_twSubjects([self.pj[SUBJECTS][x]["name"] for x in self.pj[SUBJECTS]])
@@ -8231,7 +8175,6 @@ item []:
 
             if self.twEthogram.selectedIndexes():
                 ethogramRow = self.twEthogram.selectedIndexes()[0].row()
-                code = self.twEthogram.item(ethogramRow, 1).text()
                 event = self.full_event(str(ethogramRow))
                 self.writeEvent(event, self.getLaps())
         else:
@@ -8291,39 +8234,39 @@ item []:
             """TO DO: fix this"""
             print('hasattr(self, "bcm")', hasattr(self, "bcm"))
 
-    def show_behaviors_coding_map(self):
-        """
-        show a behavior coding map
-        """
-
-        if BEHAVIORS_CODING_MAP not in self.pj or not self.pj[BEHAVIORS_CODING_MAP]:
-            QMessageBox.warning(self, programName, "No behaviors coding map found in current project")
-            return
-
-        items = [x["name"] for x in self.pj[BEHAVIORS_CODING_MAP]]
-        if len(items) == 1:
-            coding_map_name = items[0]
-        else:
-            item, ok = QInputDialog.getItem(self, "Select a coding map", "list of coding maps", items, 0, False)
-            if ok and item:
-                coding_map_name = item
-            else:
-                return
-
-        if coding_map_name in self.bcm_dict:
-            self.bcm_dict[coding_map_name].show()
-        else:
-            self.bcm_dict[coding_map_name] = behaviors_coding_map.BehaviorsCodingMapWindowClass(
-                self.pj[BEHAVIORS_CODING_MAP][items.index(coding_map_name)],
-                idx=items.index(coding_map_name))
-
-            self.bcm_dict[coding_map_name].clickSignal.connect(self.click_signal_from_behaviors_coding_map)
-
-            self.bcm_dict[coding_map_name].close_signal.connect(self.close_behaviors_coding_map)
-
-            self.bcm_dict[coding_map_name].resize(CODING_MAP_RESIZE_W, CODING_MAP_RESIZE_W)
-            self.bcm_dict[coding_map_name].setWindowFlags(Qt.WindowStaysOnTopHint)
-            self.bcm_dict[coding_map_name].show()
+    # def show_behaviors_coding_map(self):
+    #     """
+    #     show a behavior coding map
+    #     """
+    #
+    #     if BEHAVIORS_CODING_MAP not in self.pj or not self.pj[BEHAVIORS_CODING_MAP]:
+    #         QMessageBox.warning(self, programName, "No behaviors coding map found in current project")
+    #         return
+    #
+    #     items = [x["name"] for x in self.pj[BEHAVIORS_CODING_MAP]]
+    #     if len(items) == 1:
+    #         coding_map_name = items[0]
+    #     else:
+    #         item, ok = QInputDialog.getItem(self, "Select a coding map", "list of coding maps", items, 0, False)
+    #         if ok and item:
+    #             coding_map_name = item
+    #         else:
+    #             return
+    #
+    #     if coding_map_name in self.bcm_dict:
+    #         self.bcm_dict[coding_map_name].show()
+    #     else:
+    #         self.bcm_dict[coding_map_name] = behaviors_coding_map.BehaviorsCodingMapWindowClass(
+    #             self.pj[BEHAVIORS_CODING_MAP][items.index(coding_map_name)],
+    #             idx=items.index(coding_map_name))
+    #
+    #         self.bcm_dict[coding_map_name].clickSignal.connect(self.click_signal_from_behaviors_coding_map)
+    #
+    #         self.bcm_dict[coding_map_name].close_signal.connect(self.close_behaviors_coding_map)
+    #
+    #         self.bcm_dict[coding_map_name].resize(CODING_MAP_RESIZE_W, CODING_MAP_RESIZE_W)
+    #         self.bcm_dict[coding_map_name].setWindowFlags(Qt.WindowStaysOnTopHint)
+    #         self.bcm_dict[coding_map_name].show()
 
     def actionAbout_activated(self):
         """
@@ -8700,10 +8643,10 @@ item []:
         if self.pj[ETHOGRAM]:
             for idx in sorted_keys(self.pj[ETHOGRAM]):
                 self.twEthogram.setRowCount(self.twEthogram.rowCount() + 1)
-                for col in sorted(behav_fields_in_mainwindow.keys()):
+                for col in behav_fields_in_mainwindow.keys():
                     field = behav_fields_in_mainwindow[col]
-                    self.twEthogram.setItem(self.twEthogram.rowCount() - 1, col,
-                                            QTableWidgetItem(str(self.pj[ETHOGRAM][idx][field])))
+                    self.twEthogram.setItem(self.twEthogram.rowCount() - 1, field,
+                                            QTableWidgetItem(str(self.pj[ETHOGRAM][idx][col])))
         if self.twEthogram.rowCount() < len(self.pj[ETHOGRAM].keys()):
             self.dwEthogram.setWindowTitle(
                 "Ethogram (filtered {0}/{1})".format(self.twEthogram.rowCount(), len(self.pj[ETHOGRAM].keys())))
@@ -9021,35 +8964,6 @@ item []:
         """
 
         event = dict(self.pj[ETHOGRAM][behavior_idx])
-        # check if coding map
-        if "coding map" in self.pj[ETHOGRAM][behavior_idx] and self.pj[ETHOGRAM][behavior_idx]["coding map"]:
-
-            # pause if media and media playing
-            if self.pj[OBSERVATIONS][self.observationId][TYPE] in [MEDIA]:
-                if self.playerType == VLC:
-                    memState = self.mediaListPlayer.get_state()
-                    if memState == vlc.State.Playing:
-                        self.pause_video()
-
-            self.codingMapWindow = modifiers_coding_map.ModifiersCodingMapWindowClass(
-                self.pj["coding_map"][self.pj[ETHOGRAM][behavior_idx]["coding map"]])
-
-            self.codingMapWindow.resize(CODING_MAP_RESIZE_W, CODING_MAP_RESIZE_H)
-            if self.codingMapWindowGeometry:
-                self.codingMapWindow.restoreGeometry(self.codingMapWindowGeometry)
-
-            if not self.codingMapWindow.exec_():
-                return
-
-            self.codingMapWindowGeometry = self.codingMapWindow.saveGeometry()
-
-            event["from map"] = self.codingMapWindow.getCodes()
-
-            # restart media
-            if self.pj[OBSERVATIONS][self.observationId][TYPE] in [MEDIA]:
-                if self.playerType == VLC:
-                    if memState == vlc.State.Playing:
-                        self.play_video()
 
         return event
 

@@ -43,15 +43,12 @@ PROJECT_DESCRIPTION = "project_description"
 
 OBSERVATIONS = 'observations'
 EVENTS = 'events'
-TIME_OFFSET='time offset'
+TIME_OFFSET = 'time offset'
 TIME_OFFSET_SECOND_PLAYER='time offset second player'
 
-CODING_MAP = 'coding_map'
-BEHAVIORS_CODING_MAP = 'behaviors_coding_map'
 SUBJECTS = 'subjects_conf'
 ETHOGRAM = 'behaviors_conf'
 BEHAVIORAL_CATEGORIES = "behavioral_categories"
-CONVERTERS = "converters"
 
 CODING_MAP_RESIZE_W = 640
 CODING_MAP_RESIZE_H = 640
@@ -102,29 +99,29 @@ DATA_PLOT_FIELDS = {PLOT_DATA_FILEPATH_IDX: "file_path",
                     }
 DATA_PLOT_STYLES = ["b-", "r-", "g-", "bo", "ro", "go"]
 
-BEHAVIOR_CODE = "code"
+BEHAVIOR_CODE = "key"
 BEHAVIOR_CATEGORY = "category"
 
 # fields for event configuration
-fields = {'type': 0, 'key': 1, 'code': 2, 'description': 3, 'modifiers': 4, 'excluded': 5, 'coding map': 6}
+#fields = {'type': 0, 'key': 1, 'code': 2, 'description': 3, 'modifiers': 4, 'excluded': 5, 'coding map': 6}
+fields = {'type': 0, 'key': 1, 'description': 2, 'category': 3, 'modifiers': 4}
 
-behav_fields_in_mainwindow = {0: "key", 1: "code", 2: "type", 3: "description", 4:"category", 5:"modifiers", 6:"excluded"}
+#behav_fields_in_mainwindow = {0: "key", 1: "code", 2: "type", 3: "description", 4:"category", 5:"modifiers", 6:"excluded"}
+behav_fields_in_mainwindow = {'type': 0, 'key': 1, 'description': 2, 'category': 3, 'modifiers': 4}
 
 # fields in ethogram table from project window
 #behavioursFields = {'type': 0, 'key': 1, 'code': 2, 'description': 3, 'category': 4, 'modifiers': 5, 'excluded': 6, 'coding map': 7}
 behavioursFields = {'type': 0, 'key': 1, 'description': 2, 'category': 3, 'modifiers': 4}
 
 #BEHAVIOR_TYPES = ["Point event", "State event", "Point event with coding map", "State event with coding map"]
-BEHAVIOR_TYPES = ["Crença", "Colaboração", "Intenção de Compartilhar"]
+BEHAVIOR_TYPES = ["Crença", "Coordenação", "Comunicação", "Cooperação", "Percepção", "Intenção de Compartilhar"]
 
-BEHAVIOR_BARRIERS = {'Crença': ["Nenhuma Barreira"], 'Colaboração': ["Coordenação", "Comunicação", "Cooperação", "Percepção"], 'Intenção de Compartilhar': ["Nenhuma Barreira"]}
-
-TYPES_BARRIERS = {'Crença': ["absorção", "interação", "Confiança", "individualismo", "características interpessoal", "motivado(a)", "Efetiva", "Tranferência de conhecimento", "proficiência"],
-                  'Coordenação': ["Baixa interação", "esforço na comunicação", "certificar", "dificuldade de comunicação", "planejar"],
-                  'Comunicação': ["Falta de Transparência", "Falta de estratégias", "Falta de compartilhamento", "Confusão", "Relações difíceis", "comunicação",  "ajudar", "conversar", "habilidades faltantes", "Negociar"],
-                  'Cooperação': ["Apatia laboral", "Falta de reciprocidade", "Processos em equipe", "Convergência", "ensinar", "permitir"],
-                  'Percepção': ["Falta de compreenssão da informação", "argumentar"],
-                  'Intenção de Compartilhar': ["confiabilidade", "alertar", "convidar", "Privação transferencia de conhecimentos", "impor"]}
+BEHAVIOR_BARRIERS = {"Crença": ["Capacidade de absorção", "Interação infreqüente", "Confiança", "Personalidade individual", "Características interpessoais", "Fatores motivacionais", "Capacidade de absorção" , "Transferência efetiva de conhecimento", "Proficiência em conhecimento", "Atitudes"],
+                     "Coordenação": ["Baixa capacidade de trabalho", "Diversidade", "Redes sociais", "Esforço", "Certificar", "Dificuldade em transferir o conhecimento", "planejar"],
+                     "Comunicação": ["Falta de transparência", "Falta de estratégias", "Falta de compartilhamento de conhecimento", "Confusão", "Relações difíceis", "Comunicação", "Ajudar", "Conversar", "Falta de habilidades", "Negociar"],
+                     "Cooperação": ["Apatia laboral", "Falta de reciprocidade", "Processos em equipe", "Convergência", "Ensinar", "Permitir"],
+                     "Percepção": ["Não identifica o valor da informação;", "Argumentar"],
+                     "Intenção de Compartilhar": ["Confiabilidade", "Alertar", "Convidar", "Dificuldade em transferir o conhecimento", "Proteger seus próprios conhecimentos", "Impor"]}
 
 DEFAULT_BEHAVIOR_TYPE = "Crença"
 
@@ -312,7 +309,4 @@ EMPTY_PROJECT = {"time_format": HHMMSS,
                        ETHOGRAM: {},
                        OBSERVATIONS: {},
                        BEHAVIORAL_CATEGORIES: [],
-                       INDEPENDENT_VARIABLES: {},
-                       CODING_MAP: {},
-                       BEHAVIORS_CODING_MAP: [],
-                       CONVERTERS: {}}
+                       INDEPENDENT_VARIABLES: {}}

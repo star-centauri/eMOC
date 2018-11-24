@@ -3,6 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="9bf1a927-00ab-48d1-91f5-0cea2a661f1c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/add_modifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/add_modifier.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/add_modifier.ui" beforeDir="false" afterPath="$PROJECT_DIR$/add_modifier.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/add_modifier_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/add_modifier_ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/add_modifier_ui5.py" beforeDir="false" afterPath="$PROJECT_DIR$/add_modifier_ui5.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eMOC.py" beforeDir="false" afterPath="$PROJECT_DIR$/eMOC.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,36 +20,36 @@
     <session id="17152714">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.open.time.12" value="1" />
+          <entry key="project.open.time.12" value="2" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.14" value="2" />
-          <entry key="project.open.time.15" value="1" />
+          <entry key="project.open.time.15" value="2" />
           <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.opened" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="8" />
+          <entry key="py" value="19" />
           <entry key="ui" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="8" />
+          <entry key="Python" value="19" />
           <entry key="Qt UI file" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="1628" />
+          <entry key="py" value="1927" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="1628" />
+          <entry key="Python" value="1927" />
         </counts>
       </usages-collector>
     </session>
@@ -53,14 +59,29 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/eMOC.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="3158" column="44" selection-start-line="3158" selection-start-column="44" selection-end-line="3158" selection-end-column="44" />
+            <state relative-caret-position="207">
+              <caret line="2267" column="34" selection-start-line="2267" selection-start-column="34" selection-end-line="2267" selection-end-column="34" />
               <folding>
-                <element signature="e#3041#3909#0" />
-                <element signature="e#3996#4989#0" />
-                <element signature="e#37255#38181#0" />
-                <element signature="e#53035#56812#0" />
+                <element signature="e#143135#143909#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/vlc.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="96">
+              <caret line="1716" selection-start-line="1716" selection-end-line="1716" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/observation.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1530">
+              <caret line="105" column="49" selection-start-line="105" selection-start-column="49" selection-end-line="105" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -68,8 +89,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1513">
-              <caret line="129" column="19" selection-start-line="129" selection-start-column="6" selection-end-line="129" selection-end-column="19" />
+            <state relative-caret-position="629">
+              <caret line="77" selection-start-line="77" selection-end-line="77" />
               <folding>
                 <element signature="e#24#755#1" />
                 <element signature="e#767#857#0" />
@@ -83,15 +104,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/add_modifier.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="45" column="23" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="23" />
+            <state relative-caret-position="5542">
+              <caret line="351" column="11" selection-start-line="351" selection-start-column="11" selection-end-line="351" selection-end-column="11" />
               <folding>
                 <element signature="e#24#755#1" />
                 <element signature="e#767#857#0" />
                 <element signature="e#870#926#0" />
                 <element signature="e#1049#1060#0" expanded="true" />
-                <element signature="e#3015#3245#0" />
-                <element signature="e#3105#3245#1" />
               </folding>
             </state>
           </provider>
@@ -100,8 +119,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="867">
-              <caret line="51" column="8" selection-start-line="51" selection-end-line="51" selection-end-column="8" />
+            <state relative-caret-position="4998">
+              <caret line="294" column="83" selection-start-line="294" selection-start-column="83" selection-end-line="294" selection-end-column="83" />
             </state>
           </provider>
         </entry>
@@ -110,36 +129,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>self.twBehaviors.item(row, behavioursFields[&quot;coding map&quot;]).setText(&quot;&quot;)</find>
-      <find>behaviorTypeChanged</find>
-      <find>self.pbExclusionMatrix.clicked.connect(self.pbExclusionMatrix_clicked)</find>
-      <find>pbAddModifier</find>
-      <find>if self.twBehaviors.item(row, behavioursFields[&quot;coding map&quot;]).text():</find>
-      <find>pbOK_clicked</find>
-      <find>addModifier</find>
-      <find>modifiers_str</find>
-      <find>category_doubleclicked</find>
-      <find>leModifier</find>
-      <find>BehavioralCategories</find>
-      <find>add_converter</find>
-      <find>edit_project</find>
-      <find>&quot;Remover o comportamento da categoria?&quot;).format(self.twBehaviors.item(row, behavioursFields[&quot;code&quot;]).text(),</find>
-      <find>pbAddBehavior_clicked</find>
-      <find>twBehaviors_cellDoubleClicked</find>
-      <find>pbBehaviorsCategories_clicked</find>
-      <find>BEHAVIOR_BARRIERS</find>
-      <find>self.obs</find>
-      <find>codingMapsList</find>
-      <find>save_project_activated</find>
-      <find>self.load_behaviors_in_twEthogram([self.pj[ETHOGRAM][x][BEHAVIOR_CODE] for x in self.pj[ETHOGRAM]])</find>
-      <find>dwEthogram</find>
-      <find>load_behaviors_in_twEthogram</find>
-      <find>projectDialog</find>
-      <find>self.load_subjects_in_twSubjects([self.pj[SUBJECTS][x][&quot;name&quot;] for x in self.pj[SUBJECTS]])</find>
       <find>newProjectWindow.obs</find>
       <find>behaviors_conf</find>
       <find>ETHOGRAM</find>
+      <find>select_default</find>
+      <find>modifiers_default</find>
+      <find>open_project_activated</find>
+      <find>load_project</find>
+      <find>initialize_new_project</find>
+      <find>TYPES_BARRIERS</find>
+      <find>load_subjects_in_twSubjects</find>
+      <find>BEHAVIOR_CODE</find>
+      <find>load_behaviors_in_twEthogram</find>
+      <find>show_behaviors_coding_map</find>
+      <find>coding_map</find>
+      <find>CODING_MAP</find>
+      <find>BEHAVIORS_CODING_MAP</find>
+      <find>CONVERTERS</find>
       <find>twEthogram</find>
+      <find>twSubjects</find>
+      <find>new_project_activated</find>
+      <find>edit_project</find>
+      <find>converters=self.pj[CONVERTERS] if CONVERTERS in self.pj else {},</find>
+      <find>self.converters</find>
+      <find>converters=self.pj[CONVERTERS] if CONVERTERS in self.pj else {}</find>
+      <find>self.mediaplayer = self.instance.media_player_new()</find>
+      <find>converters</find>
+      <find>media_player_new</find>
+      <find>self.instance</find>
+      <find>initialize_video_tab</find>
+      <find>MediaPlayer</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -150,14 +169,15 @@
       <list>
         <option value="$PROJECT_DIR$/eMOC_ui5.py" />
         <option value="$PROJECT_DIR$/eMOC_ui.py" />
-        <option value="$PROJECT_DIR$/config.py" />
-        <option value="$PROJECT_DIR$/add_modifier.py" />
         <option value="$PROJECT_DIR$/project.py" />
+        <option value="$PROJECT_DIR$/add_modifier.py" />
+        <option value="$PROJECT_DIR$/config.py" />
+        <option value="$PROJECT_DIR$/observation.py" />
         <option value="$PROJECT_DIR$/eMOC.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
@@ -168,6 +188,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -179,7 +200,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -240,8 +260,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24973656" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -254,7 +273,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.329718" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.329718" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -270,15 +289,52 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/eMOC.py</url>
-          <line>8698</line>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/eMOC.py</url>
           <line>911</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/eMOC.py</url>
+          <line>1356</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/eMOC.py</url>
+          <line>8175</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/eMOC.py</url>
+          <line>1221</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/eMOC.py</url>
+          <line>1303</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/eMOC.py</url>
+          <line>3138</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/vlc.py</url>
+          <line>1703</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/eMOC.py</url>
+          <line>3320</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
       </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -306,23 +362,52 @@
     <entry file="file://$PROJECT_DIR$/eMOC.ui">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/eMOC.py">
+    <entry file="file://$USER_HOME$/.PyCharmCE2018.2/system/python_stubs/-442486986/builtins.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="3158" column="44" selection-start-line="3158" selection-start-column="44" selection-end-line="3158" selection-end-column="44" />
-          <folding>
-            <element signature="e#3041#3909#0" />
-            <element signature="e#3996#4989#0" />
-            <element signature="e#37255#38181#0" />
-            <element signature="e#53035#56812#0" />
-          </folding>
+        <state relative-caret-position="209">
+          <caret line="2807" column="8" selection-start-line="2807" selection-start-column="8" selection-end-line="2807" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utilities.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="511" column="51" selection-start-line="511" selection-start-column="51" selection-end-line="511" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/codecs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="310" selection-start-line="310" selection-end-line="310" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vlc_setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="43" selection-start-column="29" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vlc_local.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="20" column="3" lean-forward="true" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/observation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1530">
+          <caret line="105" column="49" selection-start-line="105" selection-start-column="49" selection-end-line="105" selection-end-column="63" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/project.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1513">
-          <caret line="129" column="19" selection-start-line="129" selection-start-column="6" selection-end-line="129" selection-end-column="19" />
+        <state relative-caret-position="629">
+          <caret line="77" selection-start-line="77" selection-end-line="77" />
           <folding>
             <element signature="e#24#755#1" />
             <element signature="e#767#857#0" />
@@ -334,23 +419,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/add_modifier.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="45" column="23" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="23" />
+        <state relative-caret-position="5542">
+          <caret line="351" column="11" selection-start-line="351" selection-start-column="11" selection-end-line="351" selection-end-column="11" />
           <folding>
             <element signature="e#24#755#1" />
             <element signature="e#767#857#0" />
             <element signature="e#870#926#0" />
             <element signature="e#1049#1060#0" expanded="true" />
-            <element signature="e#3015#3245#0" />
-            <element signature="e#3105#3245#1" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="51" column="8" selection-start-line="51" selection-end-line="51" selection-end-column="8" />
+        <state relative-caret-position="4998">
+          <caret line="294" column="83" selection-start-line="294" selection-start-column="83" selection-end-line="294" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vlc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="1716" selection-start-line="1716" selection-end-line="1716" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eMOC.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="2267" column="34" selection-start-line="2267" selection-start-column="34" selection-end-line="2267" selection-end-column="34" />
+          <folding>
+            <element signature="e#143135#143909#0" />
+          </folding>
         </state>
       </provider>
     </entry>

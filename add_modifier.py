@@ -62,8 +62,6 @@ class addModifierDialog(QDialog, Ui_Dialog):
         self.pbModifyModifier.clicked.connect(self.modifyModifier)
         self.pbModifyModifier.setIcon(QIcon(":/frame_backward"))
 
-        self.select_default.clicked.connect(self.modifiers_default)
-
         self.pbMoveUp.clicked.connect(self.moveModifierUp)
         self.pbMoveDown.clicked.connect(self.moveModifierDown)
 
@@ -102,7 +100,7 @@ class addModifierDialog(QDialog, Ui_Dialog):
         if self.tabWidgetModifiersSets.currentIndex() == -1:
             for w in [self.lbSetName, self.lbType, self.lbValues, self.leSetName, self.cbType, self.lwModifiers, self.pbMoveUp, self.pbMoveDown, self.pbRemoveModifier, self.pbRemoveSet, self.pbMoveSetLeft, self.pbMoveSetRight]:
                 w.setVisible(False)
-            for w in [self.leModifier, self.leCode, self.pbAddModifier, self.pbModifyModifier, self.select_default]:
+            for w in [self.leModifier, self.leCode, self.pbAddModifier, self.pbModifyModifier]:
                 w.setEnabled(False)
 
 
@@ -131,7 +129,7 @@ class addModifierDialog(QDialog, Ui_Dialog):
             self.modifiers_sets_dict["0"] = {"name": "", "type": SINGLE_SELECTION, "values": []}
         self.modifiers_sets_dict[str(self.tabWidgetModifiersSets.currentIndex())]["type"] = self.cbType.currentIndex()
         # disable if modifier numeric
-        for obj in [self.lbValues, self.lwModifiers, self.leModifier, self.leCode, self.lbModifier, self.lbCode, self.lbCodeHelp, self.pbMoveUp, self.pbMoveDown, self.pbRemoveModifier, self.select_default]:
+        for obj in [self.lbValues, self.lwModifiers, self.leModifier, self.leCode, self.lbModifier, self.lbCode, self.lbCodeHelp, self.pbMoveUp, self.pbMoveDown, self.pbRemoveModifier]:
             obj.setEnabled(self.cbType.currentIndex() != NUMERIC_MODIFIER)
 
     def moveSetLeft(self):
@@ -189,7 +187,7 @@ class addModifierDialog(QDialog, Ui_Dialog):
             # set visible and available buttons and others elements
             for w in [self.lbSetName, self.lbType, self.lbValues, self.leSetName, self.cbType, self.lwModifiers, self.pbMoveUp, self.pbMoveDown, self.pbRemoveModifier, self.pbRemoveSet, self.pbMoveSetLeft, self.pbMoveSetRight]:
                 w.setVisible(True)
-            for w in [self.leModifier, self.leCode, self.pbAddModifier, self.pbModifyModifier, self.select_default]:
+            for w in [self.leModifier, self.leCode, self.pbAddModifier, self.pbModifyModifier]:
                 w.setEnabled(True)
 
 
@@ -244,7 +242,7 @@ class addModifierDialog(QDialog, Ui_Dialog):
                 if self.tabWidgetModifiersSets.currentIndex() == -1:
                     for w in [self.lbSetName, self.lbType, self.lbValues, self.leSetName, self.cbType, self.lwModifiers, self.pbMoveUp, self.pbMoveDown, self.pbRemoveModifier, self.pbRemoveSet, self.pbMoveSetLeft, self.pbMoveSetRight]:
                         w.setVisible(False)
-                    for w in [self.leModifier, self.leCode, self.pbAddModifier, self.pbModifyModifier, self.select_default]:
+                    for w in [self.leModifier, self.leCode, self.pbAddModifier, self.pbModifyModifier]:
                         w.setEnabled(False)
 
 
@@ -349,19 +347,6 @@ class addModifierDialog(QDialog, Ui_Dialog):
         else:
             QMessageBox.critical(self, programName, "No modifier to add!")
             self.leModifier.setFocus()
-
-    def modifiers_default(self):
-        modificador_type = []
-        selected = 0
-
-        if self.type_new == 'Crença' or self.type_new == 'Intenção de Compartilhar':
-            modificador_type = TYPES_BARRIERS[self.type_new]
-        else:
-            modificador_type = TYPES_BARRIERS[self.type_barrier]
-
-        modificador, ok = QInputDialog.getItem(self, "Selecione um modificador", "modificador comportamentais", modificador_type, selected, False)
-        if ok and modificador:
-            self.leModifier.setText(modificador)
 
     def tabWidgetModifiersSets_changed(self, tabIndex):
         """
