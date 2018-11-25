@@ -659,7 +659,7 @@ def fix_unpaired_state_events(obsId, ethogram, observation, fix_at_time):
     closing_events_to_add = []
     flagStateEvent = False
     subjects = [event[EVENT_SUBJECT_FIELD_IDX] for event in observation[EVENTS]]
-    ethogram_behaviors = {ethogram[idx]["code"] for idx in ethogram}
+    ethogram_behaviors = {ethogram[idx]["key"] for idx in ethogram}
 
     for subject in sorted(set(subjects)):
 

@@ -3,12 +3,20 @@
   <component name="ChangeListManager">
     <list default="true" id="9bf1a927-00ab-48d1-91f5-0cea2a661f1c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/add_modifier.py" beforeDir="false" afterPath="$PROJECT_DIR$/add_modifier.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/add_modifier.ui" beforeDir="false" afterPath="$PROJECT_DIR$/add_modifier.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/add_modifier_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/add_modifier_ui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/add_modifier_ui5.py" beforeDir="false" afterPath="$PROJECT_DIR$/add_modifier_ui5.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eMOC.py" beforeDir="false" afterPath="$PROJECT_DIR$/eMOC.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eMOC.ui" beforeDir="false" afterPath="$PROJECT_DIR$/eMOC.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eMOC_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/eMOC_ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eMOC_ui5.py" beforeDir="false" afterPath="$PROJECT_DIR$/eMOC_ui5.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libvlc.dll" beforeDir="false" afterPath="$PROJECT_DIR$/libvlc.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libvlc.dylib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libvlccore.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libvlccore.dylib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/project_functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/select_modifiers.py" beforeDir="false" afterPath="$PROJECT_DIR$/select_modifiers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vlc.exe.manifest" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vlc.py" beforeDir="false" afterPath="$PROJECT_DIR$/vlc.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vlc_local.exe.manifest" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,36 +28,37 @@
     <session id="17152714">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="9" />
+          <entry key="project.closed" value="10" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.12" value="2" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.14" value="2" />
-          <entry key="project.open.time.15" value="2" />
+          <entry key="project.open.time.15" value="3" />
           <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="9" />
+          <entry key="project.open.time.8" value="1" />
+          <entry key="project.opened" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="19" />
+          <entry key="py" value="28" />
           <entry key="ui" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="19" />
+          <entry key="Python" value="28" />
           <entry key="Qt UI file" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="1927" />
+          <entry key="py" value="2228" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="1927" />
+          <entry key="Python" value="2228" />
         </counts>
       </usages-collector>
     </session>
@@ -59,20 +68,33 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/eMOC.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="2267" column="34" selection-start-line="2267" selection-start-column="34" selection-end-line="2267" selection-end-column="34" />
+            <state relative-caret-position="78">
+              <caret line="6197" lean-forward="true" selection-start-line="6197" selection-end-line="6197" />
               <folding>
-                <element signature="e#143135#143909#0" />
+                <element signature="e#23#32#0" expanded="true" />
+                <element signature="e#398#515#0" />
+                <element signature="e#528#782#0" />
+                <element signature="e#3042#3910#0" />
+                <element signature="e#3997#4990#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vlc.py">
+        <entry file="file://$PROJECT_DIR$/project_functions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="1716" selection-start-line="1716" selection-end-line="1716" />
+            <state relative-caret-position="177">
+              <caret line="672" column="37" lean-forward="true" selection-start-line="672" selection-start-column="37" selection-end-line="672" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/select_modifiers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="358">
+              <caret line="59" column="36" lean-forward="true" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -119,8 +141,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4998">
-              <caret line="294" column="83" selection-start-line="294" selection-start-column="83" selection-end-line="294" selection-end-column="83" />
+            <state relative-caret-position="173">
+              <caret line="48" selection-start-line="48" selection-end-line="48" />
             </state>
           </provider>
         </entry>
@@ -129,36 +151,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>newProjectWindow.obs</find>
-      <find>behaviors_conf</find>
-      <find>ETHOGRAM</find>
-      <find>select_default</find>
-      <find>modifiers_default</find>
-      <find>open_project_activated</find>
-      <find>load_project</find>
-      <find>initialize_new_project</find>
-      <find>TYPES_BARRIERS</find>
-      <find>load_subjects_in_twSubjects</find>
-      <find>BEHAVIOR_CODE</find>
-      <find>load_behaviors_in_twEthogram</find>
-      <find>show_behaviors_coding_map</find>
-      <find>coding_map</find>
-      <find>CODING_MAP</find>
-      <find>BEHAVIORS_CODING_MAP</find>
-      <find>CONVERTERS</find>
-      <find>twEthogram</find>
-      <find>twSubjects</find>
-      <find>new_project_activated</find>
       <find>edit_project</find>
       <find>converters=self.pj[CONVERTERS] if CONVERTERS in self.pj else {},</find>
       <find>self.converters</find>
       <find>converters=self.pj[CONVERTERS] if CONVERTERS in self.pj else {}</find>
-      <find>self.mediaplayer = self.instance.media_player_new()</find>
       <find>converters</find>
       <find>media_player_new</find>
       <find>self.instance</find>
       <find>initialize_video_tab</find>
       <find>MediaPlayer</find>
+      <find>vlc</find>
+      <find>if (not options.nosplashscreen):</find>
+      <find>media = self.instance.media_new(media_full_path)</find>
+      <find>self.mediaplayer = self.instance.media_player_new()</find>
+      <find>vlc.</find>
+      <find>mesmo nã</find>
+      <find>checkSameEvent</find>
+      <find>code</find>
+      <find>twEvents</find>
+      <find>--plugin-path</find>
+      <find>update_events_start_stop</find>
+      <find>loadEventsInTW</find>
+      <find>self.currentSubject</find>
+      <find>self.currentSubject =</find>
+      <find>twSubjects_doubleClicked</find>
+      <find>filter_subjects</find>
+      <find>actionFilterSubjects</find>
+      <find>actionDeselectCurrentSubject</find>
+      <find>twSubjects</find>
+      <find>EVENT</find>
+      <find>EVENTS</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -171,13 +193,17 @@
         <option value="$PROJECT_DIR$/eMOC_ui.py" />
         <option value="$PROJECT_DIR$/project.py" />
         <option value="$PROJECT_DIR$/add_modifier.py" />
-        <option value="$PROJECT_DIR$/config.py" />
         <option value="$PROJECT_DIR$/observation.py" />
+        <option value="$PROJECT_DIR$/vlc.py" />
+        <option value="$PROJECT_DIR$/vlc_setup.py" />
+        <option value="$PROJECT_DIR$/select_modifiers.py" />
+        <option value="$PROJECT_DIR$/project_functions.py" />
+        <option value="$PROJECT_DIR$/config.py" />
         <option value="$PROJECT_DIR$/eMOC.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-7" />
     <option name="width" value="974" />
     <option name="height" value="1047" />
@@ -188,7 +214,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -200,6 +225,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -261,19 +287,20 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24973656" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.23969631" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.29067245" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.2407809" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.38286334" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.329718" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.45878524" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -289,43 +316,33 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/eMOC.py</url>
-          <line>911</line>
+          <line>912</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/eMOC.py</url>
-          <line>1356</line>
+          <line>1357</line>
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/eMOC.py</url>
-          <line>8175</line>
-          <option name="timeStamp" value="35" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/eMOC.py</url>
-          <line>1221</line>
+          <line>1222</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/eMOC.py</url>
-          <line>1303</line>
+          <line>1304</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/eMOC.py</url>
-          <line>3138</line>
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/vlc.py</url>
-          <line>1703</line>
-          <option name="timeStamp" value="45" />
+          <line>8710</line>
+          <option name="timeStamp" value="61" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/eMOC.py</url>
-          <line>3320</line>
-          <option name="timeStamp" value="46" />
+          <line>9334</line>
+          <option name="timeStamp" value="62" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -383,17 +400,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vlc_setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="43" selection-start-column="29" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vlc_local.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="253">
           <caret line="20" column="3" lean-forward="true" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vlc_setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="51" selection-start-line="21" selection-start-column="51" selection-end-line="21" selection-end-column="51" />
         </state>
       </provider>
     </entry>
@@ -430,26 +447,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config.py">
+    <entry file="file://$PROJECT_DIR$/setup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4998">
-          <caret line="294" column="83" selection-start-line="294" selection-start-column="83" selection-end-line="294" selection-end-column="83" />
+        <state relative-caret-position="476">
+          <caret line="28" column="41" selection-start-line="28" selection-start-column="41" selection-end-line="28" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vlc.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="1716" selection-start-line="1716" selection-end-line="1716" />
+        <state relative-caret-position="28">
+          <caret line="1416" column="27" lean-forward="true" selection-start-line="1416" selection-start-column="27" selection-end-line="1416" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/select_modifiers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="59" column="36" lean-forward="true" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project_functions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="672" column="37" lean-forward="true" selection-start-line="672" selection-start-column="37" selection-end-line="672" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="48" selection-start-line="48" selection-end-line="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/eMOC.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="2267" column="34" selection-start-line="2267" selection-start-column="34" selection-end-line="2267" selection-end-column="34" />
+        <state relative-caret-position="78">
+          <caret line="6197" lean-forward="true" selection-start-line="6197" selection-end-line="6197" />
           <folding>
-            <element signature="e#143135#143909#0" />
+            <element signature="e#23#32#0" expanded="true" />
+            <element signature="e#398#515#0" />
+            <element signature="e#528#782#0" />
+            <element signature="e#3042#3910#0" />
+            <element signature="e#3997#4990#0" />
           </folding>
         </state>
       </provider>

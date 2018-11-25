@@ -126,10 +126,12 @@ BEHAVIOR_BARRIERS = {"Crença": ["Capacidade de absorção", "Interação infreq
 DEFAULT_BEHAVIOR_TYPE = "Crença"
 
 # fields for events table
-tw_events_fields = ['time', 'subject', 'code', 'type', 'modifier', 'comment']
+#tw_events_fields = ['time', 'subject', 'code', 'type', 'modifier', 'comment']
+tw_events_fields = ['Tempo', 'Sujeito', 'Chave', 'Tipo', 'Modificador', 'Barreira']
 
 # fields for project events list
-pj_events_fields = ["time", "subject", "code", "modifier", "comment"]
+#pj_events_fields = ["time", "subject", "code", "modifier", "comment"]
+pj_events_fields = ['Tempo', 'Sujeito', 'Chave', 'Tipo', 'Modificador', 'Barreira']
 
 tw_indVarFields = ["label", "description", "type", "default value", "possible values"]
 

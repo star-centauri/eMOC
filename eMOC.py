@@ -21,6 +21,7 @@ import datetime
 import multiprocessing
 import copy
 import pathlib
+import vlc
 
 try:
     from PyQt5.QtCore import *
@@ -2087,27 +2088,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             if result == VIEW:
                 self.load_observation(selectedObs[0], VIEW)
 
-            '''
-            if result == OPEN:
-                self.observationId = selectedObs[0]
-                self.loadEventsInTW(self.observationId)
-
-                if self.pj[OBSERVATIONS][self.observationId][TYPE] == LIVE:
-                    self.playerType = LIVE
-                    self.initialize_new_live_observation()
-
-                if self.pj[OBSERVATIONS][self.observationId][TYPE] in [MEDIA]:
-
-                    if not self.initialize_new_observation_vlc():
-                        self.observationId = ""
-                        self.twEvents.setRowCount(0)
-                        self.menu_options()
-
-                self.menu_options()
-                # title of dock widget
-                self.dwObservations.setWindowTitle("Events for “{}” observation".format(self.observationId))
-            '''
-
             if result == EDIT:
                 if self.observationId != selectedObs[0]:
                     self.new_observation(mode=EDIT, obsId=selectedObs[0])  # observation id to edit
@@ -2936,9 +2916,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # add states for no focal subject
         self.currentStates[""] = []
         for sbc in StateBehaviorsCodes:
-            if len([x[pj_obs_fields["code"]] for x in self.pj[OBSERVATIONS][self.observationId][EVENTS]
+            if len([x[pj_obs_fields["key"]] for x in self.pj[OBSERVATIONS][self.observationId][EVENTS]
                     if x[pj_obs_fields["subject"]] == "" and
-                       x[pj_obs_fields["code"]] == sbc and
+                       x[pj_obs_fields["key"]] == sbc and
                        x[pj_obs_fields["time"]] <= currentTime / 1000]) % 2:  # test if odd
                 self.currentStates[""].append(sbc)
 
@@ -2948,9 +2928,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             # add subject index
             self.currentStates[idx] = []
             for sbc in StateBehaviorsCodes:
-                if len([x[pj_obs_fields["code"]] for x in self.pj[OBSERVATIONS][self.observationId][EVENTS]
+                if len([x[pj_obs_fields["key"]] for x in self.pj[OBSERVATIONS][self.observationId][EVENTS]
                         if x[pj_obs_fields["subject"]] == self.pj[SUBJECTS][idx]["name"] and
-                           x[pj_obs_fields["code"]] == sbc and
+                           x[pj_obs_fields["key"]] == sbc and
                            x[pj_obs_fields["time"]] <= currentTime / 1000]) % 2:  # test if odd
                     self.currentStates[idx].append(sbc)
 
@@ -3305,15 +3285,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # add all media files to media list
         self.simultaneousMedia = False
-
-        '''
-        if useMediaFromProjectDirectory == YES:
-            for idx, mediaFile in enumerate(self.pj[OBSERVATIONS][self.observationId][FILE][PLAYER1]):
-                self.pj[OBSERVATIONS][self.observationId][FILE][PLAYER1][idx] = (os.path.dirname(self.projectFileName) +
-                                                                                 os.sep +
-                                                                                 os.path.basename(mediaFile))
-                self.projectChanged = True
-        '''
 
         for mediaFile in self.pj[OBSERVATIONS][self.observationId][FILE][PLAYER1]:
             logging.debug("media file: {}".format(mediaFile))
@@ -3709,7 +3680,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 if field_type in pj_events_fields:
 
                     field = event[pj_obs_fields[field_type]]
-                    if field_type == "time":
+                    if field_type == "Tempo":
                         field = str(self.convertTime(field))
 
                     twi = QTableWidgetItem(field)
@@ -8686,42 +8657,40 @@ item []:
         does not return value
         """
 
-        stateEventsList = [self.pj[ETHOGRAM][x][BEHAVIOR_CODE] for x in self.pj[ETHOGRAM] if
-                           STATE in self.pj[ETHOGRAM][x][TYPE].upper()]
+        # stateEventsList = [self.pj[ETHOGRAM][x][BEHAVIOR_CODE] for x in self.pj[ETHOGRAM] if
+        #                    STATE in self.pj[ETHOGRAM][x][TYPE].upper()]
 
         for row in range(0, self.twEvents.rowCount()):
 
-            t = self.twEvents.item(row, tw_obs_fields["time"]).text()
+            t = self.twEvents.item(row, tw_obs_fields["Tempo"]).text()
 
             if ":" in t:
                 time = time2seconds(t)
             else:
                 time = Decimal(t)
 
-            subject = self.twEvents.item(row, tw_obs_fields["subject"]).text()
-            code = self.twEvents.item(row, tw_obs_fields["code"]).text()
-            modifier = self.twEvents.item(row, tw_obs_fields["modifier"]).text()
+            subject = self.twEvents.item(row, tw_obs_fields["Sujeito"]).text()
+            key = self.twEvents.item(row, tw_obs_fields["Chave"]).text()
+            modifier = self.twEvents.item(row, tw_obs_fields["Modificador"]).text()
 
             # check if code is state
-            if code in stateEventsList:
-                # how many code before with same subject?
-                nbEvents = len(
-                    [event[EVENT_BEHAVIOR_FIELD_IDX] for event in self.pj[OBSERVATIONS][self.observationId][EVENTS]
-                     if event[EVENT_BEHAVIOR_FIELD_IDX] == code
-                     and event[EVENT_TIME_FIELD_IDX] < time
-                     and event[EVENT_SUBJECT_FIELD_IDX] == subject
-                     and event[EVENT_MODIFIER_FIELD_IDX] == modifier])
+            nbEvents = len(
+                [event[EVENT_BEHAVIOR_FIELD_IDX] for event in self.pj[OBSERVATIONS][self.observationId][EVENTS]
+                 if event[EVENT_BEHAVIOR_FIELD_IDX] == key
+                 and event[EVENT_TIME_FIELD_IDX] < time
+                 and event[EVENT_SUBJECT_FIELD_IDX] == subject
+                 and event[EVENT_MODIFIER_FIELD_IDX] == modifier])
 
-                if nbEvents and (nbEvents % 2):  # test >0 and  odd
-                    self.twEvents.item(row, tw_obs_fields[TYPE]).setText(STOP)
-                else:
-                    self.twEvents.item(row, tw_obs_fields[TYPE]).setText(START)
+            # if nbEvents and (nbEvents % 2):  # test >0 and  odd
+            #     self.twEvents.item(row, tw_obs_fields[TYPE]).setText(STOP)
+            # else:
+            #     self.twEvents.item(row, tw_obs_fields[TYPE]).setText(START)
 
-    def checkSameEvent(self, obsId, time, subject, code):
+    def checkSameEvent(self, obsId, time, subject, key):
         """
         check if a same event is already in events list (time, subject, code)
         """
-        return [time, subject, code] in [
+        return [time, subject, key] in [
             [x[EVENT_TIME_FIELD_IDX], x[EVENT_SUBJECT_FIELD_IDX], x[EVENT_BEHAVIOR_FIELD_IDX]]
             for x in self.pj[OBSERVATIONS][obsId][EVENTS]]
 
@@ -8752,7 +8721,7 @@ item []:
             # "row" present in case of event editing
 
             if "row" not in event and self.checkSameEvent(self.observationId, memTime, self.currentSubject,
-                                                          event["code"]):
+                                                          event["key"]):
                 _ = dialog.MessageDialog(programName,
                                          "O mesmo evento já existe (mesmo tempo, código de comportamento e assunto).", [OK])
                 return
@@ -8777,7 +8746,7 @@ item []:
                     # check if editing (original_modifiers key)
                     currentModifiers = event["original_modifiers"] if "original_modifiers" in event else ""
 
-                    modifierSelector = select_modifiers.ModifiersList(event["code"], eval(str(event["modifiers"])),
+                    modifierSelector = select_modifiers.ModifiersList(event["key"], eval(str(event["modifiers"])),
                                                                       currentModifiers)
 
                     if modifierSelector.exec_():
@@ -8834,33 +8803,26 @@ item []:
 
                 for cs in csj:
                     # close state if same state without modifier
-                    if self.close_the_same_current_event and (event["code"] == cs) and modifier_str.replace("None",
+                    if self.close_the_same_current_event and (event["key"] == cs) and modifier_str.replace("None",
                                                                                                             "").replace(
                         "|", "") == "":
                         modifier_str = cm[cs]
                         continue
 
-                    if (event["excluded"] and cs in event["excluded"].split(",")) or (
-                            event["code"] == cs and cm[cs] != modifier_str):
-                        # add excluded state event to observations (= STOP them)
-                        self.pj[OBSERVATIONS][self.observationId][EVENTS].append(
-                            [memTime - Decimal("0.001"), self.currentSubject, cs, cm[cs], ""])
-
             # remove key code from modifiers
             modifier_str = re.sub(" \(.*\)", "", modifier_str)
 
-            comment = event["comment"] if "comment" in event else ""
+            comment = event["description"] if "description" in event else ""
             subject = event["subject"] if "subject" in event else self.currentSubject
 
             # add event to pj
             if "row" in event:
                 # modifying event
-                self.pj[OBSERVATIONS][self.observationId][EVENTS][event["row"]] = [memTime, subject, event["code"],
-                                                                                   modifier_str, comment]
+                self.pj[OBSERVATIONS][self.observationId][EVENTS][event["row"]] = [memTime, subject, event["key"], event[TYPE], modifier_str, comment]
             else:
                 # add event
                 self.pj[OBSERVATIONS][self.observationId][EVENTS].append(
-                    [memTime, subject, event["code"], modifier_str, comment])
+                    [memTime, subject, event["key"], event[TYPE], modifier_str, comment])
 
             # sort events in pj
             self.pj[OBSERVATIONS][self.observationId][EVENTS].sort()
@@ -8875,12 +8837,10 @@ item []:
             self.twEvents.scrollToItem(item)
             self.projectChanged = True
             #self.send_data(Event_subject)
-            for ip in self.ipRemotes:
-                theadServer = Pyro4.core.Proxy('PYRO:eMOC@' + ip + ':9090')
+            #for ip in self.ipRemotes:
+            #    theadServer = Pyro4.core.Proxy('PYRO:eMOC@' + ip + ':9090')
 
-            theadServer.EnviarEvents(Event_subject)
-
-
+            #theadServer.EnviarEvents(Event_subject)
         except:
             dialog.MessageDialog(programName, "Mesmo não pode ser gravado.\nError: {}".format(sys.exc_info()[1]), [OK])
 
@@ -9495,7 +9455,7 @@ item []:
             self.edit_event()
         else:  # editing of more events
             dialogWindow = dialog.EditSelectedEvents()
-            dialogWindow.all_behaviors = [self.pj[ETHOGRAM][str(k)]["code"] for k in
+            dialogWindow.all_behaviors = [self.pj[ETHOGRAM][str(k)]["key"] for k in
                                           sorted([int(x) for x in self.pj[ETHOGRAM].keys()])]
             dialogWindow.all_subjects = [self.pj[SUBJECTS][str(k)]["name"] for k in
                                          sorted([int(x) for x in self.pj[SUBJECTS].keys()])]
@@ -10443,9 +10403,6 @@ if __name__ == "__main__":
             app.processEvents()
 
     availablePlayers = []
-
-    # load VLC, api para exibição de videos e imagens na aplicação api de video
-    import vlc
 
     if vlc.dll is None:
         logging.critical("VLC media player não existe")

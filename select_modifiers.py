@@ -36,7 +36,7 @@ from utilities import sorted_keys
 
 class ModifiersList(QDialog):
 
-    def __init__(self, code, modifiers_dict, currentModifier):
+    def __init__(self, key, modifiers_dict, currentModifier):
 
         super().__init__()
         self.setWindowTitle(programName)
@@ -49,7 +49,7 @@ class ModifiersList(QDialog):
 
         V1layout = QVBoxLayout()
         label = QLabel()
-        label.setText("Choose the modifier{0} for <b>{1}</b> behavior".format("s" * (len(self.modifiers_dict) > 1), code))
+        label.setText("Choose the modifier{0} for <b>{1}</b> behavior".format("s" * (len(self.modifiers_dict) > 1), key))
         V1layout.addWidget(label)
 
         Hlayout = QHBoxLayout()

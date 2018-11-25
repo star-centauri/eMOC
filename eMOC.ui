@@ -656,12 +656,12 @@ QHeaderView::section
          </property>
          <column>
           <property name="text">
-           <string>Atalho</string>
+           <string>Tipo</string>
           </property>
          </column>
          <column>
           <property name="text">
-           <string>Tipo</string>
+           <string>Atalho</string>
           </property>
          </column>
          <column>
