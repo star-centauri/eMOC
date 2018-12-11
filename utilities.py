@@ -50,10 +50,10 @@ from config import *
 def bytes_to_str(b):
     """
     Translate bytes to string.
-    
+
     Args:
         b (bytes): byte to convert
-    
+
     Returns:
         str: converted byte
     """
@@ -71,13 +71,13 @@ def bytes_to_str(b):
 def video_resize_reencode(video_paths, horiz_resol, ffmpeg_bin, quality=2000):
     """
     resize and recode one or more video with ffmpeg
-    
+
     Args:
         video_paths (list): list of video paths
         horiz_resol (int): horizontal resolution (in pixels)
         ffmpeg_bin (str): path of ffmpeg program
         quality (int): ffmpeg bitrate
-    
+
     Returns:
         bool: True
     """
@@ -152,7 +152,7 @@ def convert_time_to_decimal(pj):
         if "time offset" in pj[OBSERVATIONS][obsId]:
             pj[OBSERVATIONS][obsId]["time offset"] = Decimal(str(pj[OBSERVATIONS][obsId]["time offset"]))
         for idx, event in enumerate(pj[OBSERVATIONS][obsId][EVENTS]):
-            pj[OBSERVATIONS][obsId][EVENTS][idx][pj_obs_fields["time"]] = Decimal(str(pj[OBSERVATIONS][obsId][EVENTS][idx][pj_obs_fields["time"]]))
+            pj[OBSERVATIONS][obsId][EVENTS][idx][pj_obs_fields["Tempo"]] = Decimal(str(pj[OBSERVATIONS][obsId][EVENTS][idx][pj_obs_fields["Tempo"]]))
 
     return pj
 
@@ -167,7 +167,7 @@ def file_content_md5(file_name):
 
 def txt2np_array(file_name, columns_str, substract_first_value, converters = {}, column_converter={}):
     """read a txt file (tsv or csv) and return np array with passed columns
-    
+
     Args:
         file_name (str): path of the file to load in numpy array
         columns_str (str): indexes of columns to be loaded. First columns must be the timestamp. Example: "4,5"
@@ -186,14 +186,14 @@ def txt2np_array(file_name, columns_str, substract_first_value, converters = {},
         columns = [int(x) - 1 for x in columns_str.split(",") ]
     except:
         return False, "Problem with columns {}".format(columns_str), np.array([])
-    
+
     # check converters
     np_converters = {}
     for column_idx in column_converter:
         if column_converter[column_idx] in converters:
-            
+
             conv_name = column_converter[column_idx]
-            
+
             function = """def {}(INPUT):\n""".format(conv_name)
             function += """    INPUT = INPUT.decode("utf-8") if isinstance(INPUT, bytes) else INPUT"""
             for line in converters[conv_name]["code"].split("\n"):
@@ -204,13 +204,13 @@ def txt2np_array(file_name, columns_str, substract_first_value, converters = {},
                 exec(function)
             except:
                 #print(sys.exc_info()[1])
-                return False, "error in converter", np.array([]) 
-            
+                return False, "error in converter", np.array([])
+
             np_converters[column_idx - 1] = locals()[conv_name]
 
         else:
             print("converter {} not found".format(converters_param[column_idx]))
-            return False, "converter not found", np.array([]) 
+            return False, "converter not found", np.array([])
 
     # snif txt file
     try:
@@ -240,10 +240,10 @@ def txt2np_array(file_name, columns_str, substract_first_value, converters = {},
 
 def versiontuple(version_str):
     """Convert version from text to tuple
-    
+
     Args:
         version_str (str): version
-        
+
     Returns:
         tuple: version in tuple format (for comparison)
     """
@@ -253,13 +253,13 @@ def versiontuple(version_str):
 def state_behavior_codes(ethogram):
     """
     behavior codes defined as STATE event
-    
+
     Args:
         ethogram (dict): ethogram dictionary
-        
+
     Returns:
         list: list of behavior codes defined as STATE event
-    
+
     """
     return [ethogram[x][BEHAVIOR_CODE] for x in ethogram if "STATE" in ethogram[x][TYPE].upper()]
 
@@ -310,7 +310,7 @@ def get_current_points_by_subject(point_behaviors_codes, events, subjects, time,
                                                    if x[EVENT_SUBJECT_FIELD_IDX] == subjects[idx]["name"]
                                                       and x[EVENT_BEHAVIOR_FIELD_IDX] == sbc
                                                       and abs(x[EVENT_TIME_FIELD_IDX] - time) <= distance]
-            
+
             for event in events:
                 current_points[idx].append(event)
 
@@ -319,9 +319,9 @@ def get_current_points_by_subject(point_behaviors_codes, events, subjects, time,
 
 def get_ip_address():
     """Get current IP address
-    
+
     Args:
-    
+
     Returns:
         str: IP address
     """
@@ -332,12 +332,12 @@ def get_ip_address():
 
 def check_txt_file(file_name):
     """Extract parameters of txt file (test for tsv csv)
-    
+
     Args:
         filename (str): path of file to be analyzed
-        
+
     Returns:
-        dict: 
+        dict:
     """
     try:
         # snif txt file
@@ -347,8 +347,8 @@ def check_txt_file(file_name):
             dialect = snif.sniff(buff)
             has_header = snif.has_header(buff)
             logging.debug("dialect.delimiter: {}".format(dialect.delimiter))
-    
-    
+
+
         csv.register_dialect("dialect", dialect)
         rows_len = []
         with open(file_name, "r") as f:
@@ -361,13 +361,13 @@ def check_txt_file(file_name):
                     rows_len.append(len(row))
                     if len(rows_len) > 1:
                         break
-    
+
         # test if file empty
         if not len(rows_len):
             return {"error": "The file is empty"}
         if len(rows_len) == 1 and rows_len[0] >= 2:
             return {"homogeneous": True, "fields number": rows_len[0], "separator": "\t"}
-        
+
         if len(rows_len) > 1:
             return {"homogeneous": False}
         else:
@@ -380,7 +380,7 @@ def check_txt_file(file_name):
 def extract_frames(ffmpeg_bin, start_frame, second, current_media_path, fps, imageDir, md5_media_path, extension, frame_resize, number_of_seconds):
     """
     extract frames from media file and save them in imageDir directory
-    
+
     Args:
         ffmpeg_bin (str): path for ffmpeg
         start_frame (int): extract frames from frame
@@ -466,7 +466,7 @@ def extract_frames(ffmpeg_bin, start_frame, second, current_media_path, fps, ima
             p = subprocess.Popen(ffmpeg_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
             out, error = p.communicate()
             out, error = out.decode("utf-8"), error.decode("utf-8")
-        
+
             if error:
                 logging.debug("ffmpeg error: {}".format(error))
 
@@ -489,7 +489,7 @@ def complete(l, max):
 def datetime_iso8601():
     """
     current date time in ISO8601 format
-    
+
     Returns:
         str: date time in ISO8601 format
     """
@@ -510,10 +510,10 @@ def replace_spaces(l):
 def sorted_keys(d):
     """
     return list of sorted keys of provided dictionary
-    
+
     Args:
         d (dict): dictionary
-        
+
     Returns:
          list: dictionary keys sorted numerically
     """
@@ -620,10 +620,10 @@ def float2decimal(f):
 def time2seconds(time) -> Decimal:
     """
     convert hh:mm:ss.s to number of seconds (decimal)
-    
+
     Args
         time (str): time (hh:mm:ss.zzz format)
-        
+
     Returns:
         Decimal: time in seconds
     """
@@ -682,10 +682,10 @@ def eol2space(s):
 def test_ffmpeg_path(FFmpegPath):
     """
     test if ffmpeg has valid path
-    
+
     Args:
         FFmpegPath (str): ffmepg path to test
-        
+
     Returns:
         bool: True: path found
         str: message
@@ -742,7 +742,7 @@ def playWithVLC(fileName):
 def check_ffmpeg_path():
     """
     check for ffmpeg path
-    
+
     Returns:
         bool: True if ffmpeg path found else False
         str: if bool True returns ffmpegpath else returns error message
@@ -996,4 +996,3 @@ def behavior_color(colors_list, idx):
 
 class ThreadSignal(QObject):
     sig = pyqtSignal(int, float, float, float, bool, bool, str, str, str)
-

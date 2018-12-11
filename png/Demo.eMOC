@@ -1,0 +1,159 @@
+{
+ "time_format":"hh:mm:ss",
+ "project_date":"2018-12-10T09:39:27",
+ "project_name":"Demo",
+ "project_description":"Testando a demo para mais detalhes do que se faz.",
+ "project_format_version":"4.0",
+ "subjects_conf":{
+  "0":{
+   "key":"B",
+   "name":"Bruna",
+   "description":"Estagiaria do tecnoAssist"
+  },
+  "1":{
+   "key":"P",
+   "name":"Patrick",
+   "description":"Estagiario do tecnoAssist"
+  },
+  "2":{
+   "key":"A",
+   "name":"Ang\u00e9lica",
+   "description":"Formada em colabora\u00e7\u00e3o"
+  }
+ },
+ "behaviors_conf":{
+  "0":{
+   "type":"Cren\u00e7a",
+   "key":"C",
+   "description":"N\u00edvel de confian\u00e7a de 0 a 10",
+   "category":"Confian\u00e7a",
+   "modifiers":""
+  },
+  "1":{
+   "type":"Coordena\u00e7\u00e3o",
+   "key":"O",
+   "description":"",
+   "category":"Esfor\u00e7o",
+   "modifiers":{
+    "0":{
+     "name":"N\u00edvel Esfor\u00e7o",
+     "type":0,
+     "values":[
+      "Esfor\u00e7o frequente (E)",
+      "Falso Esfor\u00e7o (F)",
+      "Esfor\u00e7o Mediano (M)"
+     ]
+    }
+   }
+  },
+  "2":{
+   "type":"Inten\u00e7\u00e3o de Compartilhar",
+   "key":"I",
+   "description":"Alerta em rela\u00e7\u00e3o ao grupo",
+   "category":"Alertar",
+   "modifiers":""
+  },
+  "3":{
+   "type":"Comunica\u00e7\u00e3o",
+   "key":"M",
+   "description":"",
+   "category":"Falta de transpar\u00eancia",
+   "modifiers":""
+  }
+ },
+ "observations":{
+  "bruna":{
+   "file":{
+    "1":[
+     "E:/Download/20180503_104922.mp4"
+    ],
+    "2":[]
+   },
+   "type":"MEDIA",
+   "date":"2018-12-10T10:07:31",
+   "description":"teste",
+   "time offset":0.0,
+   "events":[
+    [
+     1.605,
+     "Bruna",
+     "O",
+     "Coordena\u00e7\u00e3o",
+     "Esfor\u00e7o Mediano",
+     ""
+    ],
+    [
+     2.604,
+     "Bruna",
+     "I",
+     "Inten\u00e7\u00e3o de Compartilhar",
+     "",
+     "Alerta em rela\u00e7\u00e3o ao grupo"
+    ],
+    [
+     6.353,
+     "Ang\u00e9lica",
+     "O",
+     "Coordena\u00e7\u00e3o",
+     "Falso Esfor\u00e7o",
+     ""
+    ],
+    [
+     7.351,
+     "Ang\u00e9lica",
+     "M",
+     "Comunica\u00e7\u00e3o",
+     "",
+     ""
+    ],
+    [
+     8.355,
+     "Ang\u00e9lica",
+     "C",
+     "Cren\u00e7a",
+     "",
+     "N\u00edvel de confian\u00e7a de 0 a 10"
+    ],
+    [
+     13.855,
+     "Patrick",
+     "M",
+     "Comunica\u00e7\u00e3o",
+     "",
+     ""
+    ]
+   ],
+   "independent_variables":{
+    "Ambiente":""
+   },
+   "time offset second player":0.0,
+   "visualize_spectrogram":false,
+   "close_behaviors_between_videos":false,
+   "media_info":{
+    "length":{
+     "E:/Download/20180503_104922.mp4":31.16
+    },
+    "fps":{
+     "E:/Download/20180503_104922.mp4":29.97
+    },
+    "hasVideo":{
+     "E:/Download/20180503_104922.mp4":true
+    },
+    "hasAudio":{
+     "E:/Download/20180503_104922.mp4":true
+    }
+   }
+  }
+ },
+ "behavioral_categories":[],
+ "independent_variables":{
+  "0":{
+   "label":"Ambiente",
+   "description":"Laborat\u00f3rio mediano silencioso",
+   "type":"text",
+   "default value":"",
+   "possible values":""
+  }
+ },
+ "coding_map":{}
+}

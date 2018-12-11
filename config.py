@@ -215,9 +215,6 @@ FFMPEG = 'ffmpeg'
 
 MEDIA_FILE_INFO = "media_file_info"
 
-STATE = "STATE"
-POINT = "POINT"
-
 START = "START"
 STOP = "STOP"
 
@@ -255,7 +252,7 @@ SPECTROGRAM_DEFAULT_COLOR_MAP = 'viridis'
 # see matplotlib.colors.cnames.keys()
 # https://xkcd.com/color/rgb/
 
-# sage colors are no more available 
+# sage colors are no more available
 # darksage #598556
 # lightsage #bcecac
 # sage #87ae73

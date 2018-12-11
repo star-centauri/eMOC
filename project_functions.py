@@ -37,10 +37,10 @@ def remove_media_files_path(pj):
     """
     remove path from media files
     tested
-    
+
     Args:
         pj (dict): project file
-    
+
     Returns:
         dict: project without media file paths
     """
@@ -66,11 +66,11 @@ def media_full_path(media_file, project_file_name):
     """
     media full path
     add path of BORIS project if media without path
-    
+
     Args:
         media_file (str): media file path
         project_file_name (str): project file name
-    
+
     Returns:
         str: media full path
     """
@@ -89,17 +89,17 @@ def media_full_path(media_file, project_file_name):
 def check_if_media_available(observation, project_file_name):
     """
     check if media files available
-    
+
     Args:
         observation (dict): observation to be checked
-        
+
     Returns:
          bool: True if media files found or for live observation
                else False
     """
     if observation[TYPE] in [LIVE]:
         return True, ""
-        
+
     for nplayer in ALL_PLAYERS:
         if nplayer in observation[FILE]:
             if not isinstance(observation[FILE][nplayer], list):
@@ -112,13 +112,13 @@ def check_if_media_available(observation, project_file_name):
 def create_subtitles(pj, selected_observations, parameters, export_dir):
     """
     create subtitles for selected observations, subjects and behaviors
-    
+
     Args:
-        pj (dict): project 
+        pj (dict): project
         selected_observations (list): list of observations
         parameters (dict):
         export_dir (str): directory to save subtitles
-    
+
     Returns:
         bool: True if OK else False
         str: error message
@@ -127,7 +127,7 @@ def create_subtitles(pj, selected_observations, parameters, export_dir):
     def subject_color(subject):
         """
         subject color
-        
+
         Args:
             subject (str): subject name
 
@@ -160,7 +160,7 @@ def create_subtitles(pj, selected_observations, parameters, export_dir):
                                 "ORDER BY start").format(",".join(["?"] * len(parameters["selected subjects"])),
                                                          ",".join(["?"] * len(parameters["selected behaviors"]))),
                                 [obsId] + parameters["selected subjects"] + parameters["selected behaviors"])
-    
+
                 for idx, row in enumerate(cursor.fetchall()):
                     col1, col2 = subject_color(row["subject"])
                     if parameters["include modifiers"]:
@@ -178,7 +178,7 @@ def create_subtitles(pj, selected_observations, parameters, export_dir):
                                                          subject=row["subject"],
                                                          behavior=row["behavior"],
                                                          modifiers=modifiers_str)
-    
+
                 file_name = str(pathlib.Path(pathlib.Path(export_dir) / utilities.safeFileName(obsId)).with_suffix(".srt"))
                 try:
                     with open(file_name, "w") as f:
@@ -222,7 +222,7 @@ def create_subtitles(pj, selected_observations, parameters, export_dir):
                                                                         subject=row["subject"],
                                                                         behavior=row["behavior"],
                                                                         modifiers=modifiers_str)
-    
+
                         file_name = str(pathlib.Path(pathlib.Path(export_dir) / pathlib.PurePosixPath(mediaFile).name).with_suffix(".srt"))
                         try:
                             with open(file_name, "w") as f:
@@ -230,7 +230,7 @@ def create_subtitles(pj, selected_observations, parameters, export_dir):
                         except:
                             flag_ok = False
                             msg += "observation: {}\ngave the following error:\n{}\n".format(obsId, str(sys.exc_info()[1]))
-    
+
                         init = end
 
         return flag_ok, msg
@@ -241,15 +241,15 @@ def observation_total_length(observation):
     """
     Total length of observation
     tested
-    
+
     media: if media length not available return 0
             if more media are queued, return sum of media length
-    
+
     live: return last event time
-    
+
     Args:
         observation (dict): observation dictionary
-        
+
     Returns:
         Decimal: total length in seconds
 
@@ -282,14 +282,14 @@ def observation_total_length(observation):
                             observation["media_info"]["length"] = {}
                         if "fps" not in observation["media_info"]:
                             observation["media_info"]["fps"] = {}
-    
+
                     observation["media_info"]["length"][mediaFile] = r["duration"]
                     observation["media_info"]["fps"][mediaFile] = r["fps"]
-    
+
                     mediaLength = r["duration"]
-    
+
                 total_media_length[player] += Decimal(mediaLength)
-        
+
         if -1 in [total_media_length[x] for x in total_media_length]:
             return -1
 
@@ -307,7 +307,7 @@ def events_start_stop(ethogram, events):
     """
     returns events with status (START/STOP or POINT)
     take consideration of subject
-    
+
     Args:
         events (list): list of events
 
@@ -341,7 +341,7 @@ def events_start_stop(ethogram, events):
 def extract_observed_subjects(pj, selected_observations):
     """
     extract unique subjects present in observations list
-    
+
     return: list
     """
 
@@ -358,10 +358,10 @@ def extract_observed_subjects(pj, selected_observations):
 def open_project_json(projectFileName):
     """
     open project json
-    
+
     Args:
         projectFileName (str): path of project
-        
+
     Returns:
         str: project path
         bool: True if project changed
@@ -402,7 +402,7 @@ def open_project_json(projectFileName):
 
     # check if project file version is newer than current BORIS project file version
     if "project_format_version" in pj and Decimal(pj["project_format_version"]) > Decimal(project_format_version):
-      
+
         return projectFileName, projectChanged, {"error": ("Este arquivo de projeto foi criado com uma versão mais recente do BORIS.<br>"
                                                         "Você pode utilizar o BORIS <b>v. >= {}</b> Para abri esse arquivo").format(pj["project_format_version"])}, msg
 
@@ -436,7 +436,7 @@ def open_project_json(projectFileName):
         for idx in [x for x in pj[SUBJECTS]]:
             key, name = pj[SUBJECTS][idx]
             pj[SUBJECTS][idx] = {"key": key, "name": name, "description": ""}
-        
+
         msg = ("O arquivo de projeto foi convertido para o novo formato (v. {}) Em uso com sua versão do BORIS.<br>"
                                                     "Escolha um novo nome de arquivo para salvá-lo.").format(project_format_version)
         projectFileName = ""
@@ -483,7 +483,7 @@ def open_project_json(projectFileName):
     if project_lowerthan4:
 
         copyfile(projectFileName, projectFileName.replace(".boris", "_old_version.boris"))
-        
+
         msg = ("O projeto foi atualizado para a versão atual do projeto ({project_format_version}).\n\n"
                "O projeto de arquivo antigo foi salvo como {project_file_name}").format(project_format_version=project_format_version,
                                                                                project_file_name=projectFileName.replace(".boris", "_old_version.boris"))
@@ -501,7 +501,7 @@ def open_project_json(projectFileName):
 
                 for media_file_path in pj[OBSERVATIONS][obs]["file"][player]:
                     # FIX: ffmpeg path
-                    
+
                     ret, msg = utilities.check_ffmpeg_path()
                     if not ret:
                         return projectFileName, projectChanged, {"error": "FFmpeg path not found"}, ""
@@ -540,7 +540,7 @@ def open_project_json(projectFileName):
 
     if project_updated:
         msg = "As informações dos arquivos de mídia foram atualizadas para o novo formato do projeto."
-        
+
     return projectFileName, projectChanged, pj, msg
 
 def event_type(code, ethogram):
@@ -563,7 +563,7 @@ def event_type(code, ethogram):
 def check_events(obsId, ethogram, observation):
     """
     Check if coded events are in ethogram
-    
+
     Args:
         obsId (str): id of observation to check
         ethogram (dict): ethogram of project
@@ -596,15 +596,17 @@ def check_state_events_obs(obsId, ethogram, observation, time_format=HHMMSS):
 
     out = ""
 
+    print(observation)
+    print(ethogram)
     # check if behaviors are defined as "state event"
     event_types = {ethogram[idx]["type"] for idx in ethogram}
 
-    if not event_types or event_types == {"Point event"}:
-        return (True, "No behavior is defined as `State event`")
+    #if not event_types or event_types == {"Point event"}:
+    #    return (True, "No behavior is defined as `State event`")
 
     flagStateEvent = False
     subjects = [event[EVENT_SUBJECT_FIELD_IDX] for event in observation[EVENTS]]
-    ethogram_behaviors = {ethogram[idx]["code"] for idx in ethogram}
+    ethogram_behaviors = {ethogram[idx]["key"] for idx in ethogram}
 
     for subject in sorted(set(subjects)):
 
@@ -613,42 +615,42 @@ def check_state_events_obs(obsId, ethogram, observation, time_format=HHMMSS):
 
         for behavior in sorted(set(behaviors)):
             if behavior not in ethogram_behaviors:
-                return (False, "The behaviour <b>{}</b> is not defined in the ethogram.<br>".format(behavior))
-            else:
-                if STATE in event_type(behavior, ethogram).upper():
-                    flagStateEvent = True
-                    lst, memTime = [], {}
-                    for event in [event for event in observation[EVENTS]
-                                  if event[EVENT_BEHAVIOR_FIELD_IDX] == behavior and
-                                  event[EVENT_SUBJECT_FIELD_IDX] == subject]:
-
-                        behav_modif = [event[EVENT_BEHAVIOR_FIELD_IDX], event[EVENT_MODIFIER_FIELD_IDX]]
-
-                        if behav_modif in lst:
-                            lst.remove(behav_modif)
-                            del memTime[str(behav_modif)]
-                        else:
-                            lst.append(behav_modif)
-                            memTime[str(behav_modif)] = event[EVENT_TIME_FIELD_IDX]
-
-                    for event in lst:
-                        out += ("""The behavior <b>{behavior}</b> {modifier} is not PAIRED for subject"""
-                                """ "<b>{subject}</b>" at <b>{time}</b><br>""").format(
-                                      behavior=behavior,
-                                      modifier=("(modifier "+ event[1] + ") ") if event[1] else "",
-                                      subject=subject if subject else NO_FOCAL_SUBJECT,
-                                      time=memTime[str(event)] if time_format == S else utilities.seconds2time(memTime[str(event)]))
+                return (False, "O comportamento <b>{}</b> não está definido no etograma.<br>".format(behavior))
+            # else:
+            #     if STATE in event_type(behavior, ethogram).upper():
+            #         flagStateEvent = True
+            #         lst, memTime = [], {}
+            #         for event in [event for event in observation[EVENTS]
+            #                       if event[EVENT_BEHAVIOR_FIELD_IDX] == behavior and
+            #                       event[EVENT_SUBJECT_FIELD_IDX] == subject]:
+            #
+            #             behav_modif = [event[EVENT_BEHAVIOR_FIELD_IDX], event[EVENT_MODIFIER_FIELD_IDX]]
+            #
+            #             if behav_modif in lst:
+            #                 lst.remove(behav_modif)
+            #                 del memTime[str(behav_modif)]
+            #             else:
+            #                 lst.append(behav_modif)
+            #                 memTime[str(behav_modif)] = event[EVENT_TIME_FIELD_IDX]
+            #
+            #         for event in lst:
+            #             out += ("""O comportamento <b>{behavior}</b> {modifier} não é PAIRED par assunto"""
+            #                     """ "<b>{subject}</b>" a <b>{time}</b><br>""").format(
+            #                           behavior=behavior,
+            #                           modifier=("(modifier "+ event[1] + ") ") if event[1] else "",
+            #                           subject=subject if subject else NO_FOCAL_SUBJECT,
+            #                           time=memTime[str(event)] if time_format == S else utilities.seconds2time(memTime[str(event)]))
 
     return (False, out) if out else (True, "All state events are PAIRED")
 
 def fix_unpaired_state_events(obsId, ethogram, observation, fix_at_time):
     """
     fix unpaired state events in observation
-    
+
     Args:
         obsId (str): observation id
         ethogram (dict): ethogram dictionary
-        observation (dict): observation dictionary 
+        observation (dict): observation dictionary
         fix_at_time (Decimal): time to fix the unpaired events
 
     Returns:
@@ -695,7 +697,7 @@ def fix_unpaired_state_events(obsId, ethogram, observation, fix_at_time):
                                                   event[1], # modifiers
                                                   "" # comment
                                                   ])
-                    
+
                     '''
                     out += ("""The behavior <b>{behavior}</b> {modifier} is not PAIRED for subject"""
                             """ "<b>{subject}</b>" at <b>{time}</b><br>""").format(
@@ -710,17 +712,17 @@ def fix_unpaired_state_events(obsId, ethogram, observation, fix_at_time):
 def check_project_integrity(pj, time_format, project_file_name):
     """
     check project integrity
-    
+
     check if behaviors in observations are in ethogram
-    
+
     Args:
         pj (dict): BORIS project
-    
+
     Returns:
         str: message
     """
     out = ""
-    
+
     # check for behavior not in ethogram
     # remove because already tested bt check_state_events_obs function
     '''
@@ -741,7 +743,7 @@ def check_project_integrity(pj, time_format, project_file_name):
                 if out:
                     out += "<br><br>"
                 out += "Observation: <b>{}</b><br>{}".format(obs_id, msg)
-    
+
         # check if behavior belong to category that is not in categories list
         for idx in pj[ETHOGRAM]:
             if BEHAVIOR_CATEGORY in pj[ETHOGRAM][idx]:
@@ -752,7 +754,7 @@ def check_project_integrity(pj, time_format, project_file_name):
                         out += ("The behavior <b>{}</b> belongs to the behavioral category <b>{}</b> "
                                "that is no more in behavioral categories list.").format(pj[ETHOGRAM][idx][BEHAVIOR_CODE],
                                                                                         pj[ETHOGRAM][idx][BEHAVIOR_CATEGORY])
-    
+
         # check if all media are available
         for obs_id in pj[OBSERVATIONS]:
             ok, msg = check_if_media_available(pj[OBSERVATIONS][obs_id], project_file_name)
@@ -760,8 +762,7 @@ def check_project_integrity(pj, time_format, project_file_name):
                 if out:
                     out += "<br><br>"
                 out += "Observation: <b>{}</b><br>{}".format(obs_id, msg)
-    
+
         return out
     except:
         return str(sys.exc_info()[1])
-

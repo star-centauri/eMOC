@@ -1067,7 +1067,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def ffmpeg_process(self, action):
         """
         launch ffmpeg process
-        
+
         Args:
             action (str): "reencode_resize, rotate
         """
@@ -1201,7 +1201,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def signal_from_subjects_pad(self, event):
         """
-        receive signal from subjects pad 
+        receive signal from subjects pad
         """
         self.keyPressEvent(event)
 
@@ -1798,9 +1798,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def behaviors_coding_map_creator_signal_addtoproject(self, behav_coding_map):
         """
         add the behav coding map received from behav_coding_map_creator to current project
-        
+
         Args:
-            behav_coding_map (dict): 
+            behav_coding_map (dict):
         """
 
         if not self.project:
@@ -1835,7 +1835,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def load_observation(self, obsId, mode="start"):
         """
         load observation obsId
-    
+
         Args:
             obsId (str): observation id
             mode (str): "start" to start observation
@@ -1886,7 +1886,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def open_observation(self, mode):
         """
         start or view an observation
-        
+
         Args:
             mode (str): "start" to start observation
                         "view" to view observation
@@ -4790,7 +4790,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             for event in events:
                 if (event[EVENT_SUBJECT_FIELD_IDX] in selectedSubjects or
                         (not event[EVENT_SUBJECT_FIELD_IDX] and NO_FOCAL_SUBJECT in selectedSubjects)):
-                    observed_behaviors.append(event[EVENT_BEHAVIOR_FIELD_IDX])
+                    observed_behaviors.append(' - '.join([event[3], event[4]]))
 
         # remove duplicate
         observed_behaviors = list(set(observed_behaviors))
@@ -4825,10 +4825,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 
         """
-
         paramPanelWindow = param_panel.Param_panel()
         paramPanelWindow.resize(600, 500)
-        paramPanelWindow.setWindowTitle("Select subjects and behaviors")
+        paramPanelWindow.setWindowTitle("Selecione assuntos e comportamentos")
         paramPanelWindow.selectedObservations = selectedObservations
         paramPanelWindow.pj = self.pj
         paramPanelWindow.extract_observed_behaviors = self.extract_observed_behaviors
@@ -4891,58 +4890,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         logging.debug('observed behaviors: {0}'.format(observedBehaviors))
 
-        if BEHAVIORAL_CATEGORIES in self.pj:
-            categories = self.pj[BEHAVIORAL_CATEGORIES][:]
-            # check if behavior not included in a category
-            try:
-                if "" in [self.pj[ETHOGRAM][idx]["category"] for idx in self.pj[ETHOGRAM] if
-                          "category" in self.pj[ETHOGRAM][idx]]:
-                    categories += [""]
-            except:
-                categories = ["###no category###"]
+        for behavior in observedBehaviors:
+            paramPanelWindow.item = QListWidgetItem(behavior)
+            paramPanelWindow.item.setCheckState(Qt.Checked)
+            paramPanelWindow.lwBehaviors.addItem(paramPanelWindow.item)
 
-        else:
-            categories = ["###no category###"]
-
-        for category in categories:
-
-            if category != "###no category###":
-                if category == "":
-                    paramPanelWindow.item = QListWidgetItem("No category")
-                    paramPanelWindow.item.setData(34, "No category")
-                else:
-                    paramPanelWindow.item = QListWidgetItem(category)
-                    paramPanelWindow.item.setData(34, category)
-
-                font = QFont()
-                font.setBold(True)
-                paramPanelWindow.item.setFont(font)
-                paramPanelWindow.item.setData(33, "category")
-                paramPanelWindow.item.setData(35, False)
-
-                paramPanelWindow.lwBehaviors.addItem(paramPanelWindow.item)
-
-            for behavior in [self.pj[ETHOGRAM][x]["code"] for x in sorted_keys(self.pj[ETHOGRAM])]:
-
-                if ((categories == ["###no category###"])
-                        or (behavior in [self.pj[ETHOGRAM][x][BEHAVIOR_CODE] for x in self.pj[ETHOGRAM]
-                                         if "category" in self.pj[ETHOGRAM][x] and self.pj[ETHOGRAM][x][
-                                "category"] == category])):
-
-                    paramPanelWindow.item = QListWidgetItem(behavior)
-                    if behavior in observedBehaviors:
-                        paramPanelWindow.item.setCheckState(Qt.Checked)
-                    else:
-                        paramPanelWindow.item.setCheckState(Qt.Unchecked)
-
-                    if category != "###no category###":
-                        paramPanelWindow.item.setData(33, "behavior")
-                        if category == "":
-                            paramPanelWindow.item.setData(34, "No category")
-                        else:
-                            paramPanelWindow.item.setData(34, category)
-
-                    paramPanelWindow.lwBehaviors.addItem(paramPanelWindow.item)
 
         if not paramPanelWindow.exec_():
             return {"selected subjects": [],
@@ -6166,7 +6118,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         plot events in time diagram
         """
-        result, selected_observations = self.selectObservations(MULTIPLE)
+        result, selected_observations = self.selectObservations(MULTIPLE) #Seleciona as observações que entraram no gráfico
 
         if not selected_observations:
             return
@@ -6178,7 +6130,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                                               self.pj[OBSERVATIONS][obs_id], self.timeFormat)
 
             if not r:
-                out += "Observation: <strong>{obs_id}</strong><br>{msg}<br>".format(obs_id=obs_id, msg=msg)
+                out += "Observação: <strong>{obs_id}</strong><br>{msg}<br>".format(obs_id=obs_id, msg=msg)
                 not_paired_obs_list.append(obs_id)
 
         if out:
@@ -6270,7 +6222,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def plot_events2_triggered(self):
         """
-        new plot events with matplotlib 
+        new plot events with matplotlib
         """
 
         result, selectedObservations = self.selectObservations(MULTIPLE)
@@ -6688,7 +6640,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def convertTime(self, sec):
         """
         convert time in base of current format
-        
+
         Args:
             sec: time in seconds
 
@@ -6705,9 +6657,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def edit_project(self, mode):
         """
         project management
-        
+
         Args:
-            mode (str): new/edit 
+            mode (str): new/edit
         """
 
         logging.debug("self.projectChanged: {}".format(self.projectChanged))
@@ -8198,7 +8150,7 @@ item []:
             self.bcm.clickSignal.disconnect()
             self.bcm.keypressSignal.disconnect()
             self.bcm.close_signal.disconnect()
-            
+
             self.bcm.deleteLater()
             #del self.bcm
             '''
@@ -8630,7 +8582,7 @@ item []:
     def load_subjects_in_twSubjects(self, subjects_to_show):
         """
         fill subjects table widget with subjects from subjects_to_show
-        
+
         Args:
             subjects_to_show (list): list of subject to be shown
         """
@@ -8704,7 +8656,7 @@ item []:
 
         Args:
             event (dict): event parameters
-            memTime (Decimal): time 
+            memTime (Decimal): time
 
         """
 
@@ -8877,7 +8829,7 @@ item []:
         no more add time offset!
 
         Args:
-        
+
         Returns:
             decimal: cumulative time in seconds
 
@@ -9713,12 +9665,12 @@ item []:
     def create_behavioral_strings(self, obsId, subj, plot_parameters):
         """
         return the behavioral string for subject in obsId
-        
+
         Args:
             obsId (str): observation id
             subj (str): subject
             plot_parameters (dict): parameters
-        
+
         Returns:
             str: behavioral string for selected subject in selected observation
         """

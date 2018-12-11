@@ -64,13 +64,11 @@ class Param_panel(QDialog, Ui_Dialog):
         self.rb_limit.clicked.connect(lambda: self.rb_time(TIME_EVENTS))
         self.rb_interval.clicked.connect(lambda: self.rb_time(TIME_ARBITRARY_INTERVAL))
 
-
     def rb_time(self, button):
         """
         time
         """
         self.frm_time_interval.setEnabled(button == TIME_ARBITRARY_INTERVAL)
-
 
     def subjects_button_clicked(self, command):
         for idx in range(self.lwSubjects.count()):
@@ -81,7 +79,6 @@ class Param_panel(QDialog, Ui_Dialog):
                 cb.setChecked(False)
             if command == "reverse selection":
                 cb.setChecked(not cb.isChecked() )
-
 
     def behaviors_button_clicked(self, command):
         for idx in range(self.lwBehaviors.count()):
@@ -98,7 +95,6 @@ class Param_panel(QDialog, Ui_Dialog):
                         self.lwBehaviors.item(idx).setCheckState(Qt.Unchecked)
                     else:
                         self.lwBehaviors.item(idx).setCheckState(Qt.Checked)
-
 
     def ok(self):
 
@@ -117,7 +113,6 @@ class Param_panel(QDialog, Ui_Dialog):
 
         self.accept()
 
-
     def behavior_item_clicked(self, item):
         """
         check / uncheck behaviors belonging to the clicked category
@@ -134,8 +129,6 @@ class Param_panel(QDialog, Ui_Dialog):
                         self.lwBehaviors.item(i).setCheckState(Qt.Checked)
 
             item.setData(35, not item.data(35))
-
-
 
     def cb_changed(self):
         selectedSubjects = []
@@ -159,4 +152,3 @@ class Param_panel(QDialog, Ui_Dialog):
                     self.lwBehaviors.item(idx).setCheckState(Qt.Checked)
                 else:
                     self.lwBehaviors.item(idx).setCheckState(Qt.Unchecked)
-

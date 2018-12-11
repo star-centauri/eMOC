@@ -1,0 +1,33 @@
+{
+ "time_format":"hh:mm:ss",
+ "project_date":"2018-12-11T10:55:01",
+ "project_name":"demo2",
+ "project_description":"testando",
+ "project_format_version":"4.0",
+ "subjects_conf":{
+  "0":{
+   "key":"T",
+   "name":"teste",
+   "description":""
+  }
+ },
+ "behaviors_conf":{
+  "0":{
+   "type":"Cren\u00e7a",
+   "key":"C",
+   "description":"teste01",
+   "category":"Confian\u00e7a",
+   "modifiers":""
+  },
+  "1":{
+   "type":"Comunica\u00e7\u00e3o",
+   "key":"D",
+   "description":"teste02",
+   "category":"Falta de transpar\u00eancia",
+   "modifiers":""
+  }
+ },
+ "observations":{},
+ "behavioral_categories":[],
+ "independent_variables":{}
+}
