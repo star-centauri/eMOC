@@ -258,17 +258,7 @@ SPECTROGRAM_DEFAULT_COLOR_MAP = 'viridis'
 # sage #87ae73
 
 
-BEHAVIORS_PLOT_COLORS = ['tab:blue',
-                         'tab:orange',
-                         'tab:green',
-                         'tab:red',
-                         'tab:purple',
-                         'tab:brown',
-                         'tab:pink',
-                         'tab:gray',
-                         'tab:olive',
-                         'tab:cyan',
-                         "blue", "green", "red", "cyan", "magenta","yellow", "lime",
+BEHAVIORS_PLOT_COLORS = ["blue", "green", "red", "cyan", "magenta","yellow", "lime",
                          "darksalmon", "purple", "orange", "maroon", "silver",
                          "slateblue", "hotpink", "steelblue", "darkgoldenrod",
                          'aqua','aquamarine',

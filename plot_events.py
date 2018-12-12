@@ -40,6 +40,7 @@ from matplotlib import colors as mcolors
 import numpy as np
 import json
 import pathlib
+import time
 
 from config import *
 import utilities
@@ -528,67 +529,61 @@ def create_events_plot2_new(pj, #projeto atual
     bar_height = 0.5
     init = dt.datetime(2017, 1, 1)
     par1 = 1
+    i = 0
+    selected_behaviors.sort()
 
-    for obs_id in selected_observations:
-        fig, ax = plt.subplots(figsize=(20, 8), nrows=1, ncols=1, sharex=True)
-        ylabels = [" ".join(x) for x in selected_behaviors]
-        max_len = len(selected_behaviors)
-        ax.set_title("Observação {}\n".format(obs_id), fontsize=14)
+    fig, ax = plt.subplots(figsize=(20, 8), nrows=1, ncols=1, sharex=True)
 
-        ax.set_ylim(ymin=0, ymax = (max_len * par1) + par1 )
-        pos = np.arange(par1, max_len * par1 + par1 + 1, par1)
-        ax.set_yticks(pos[:len(ylabels)])
-        ax.set_yticklabels(ylabels, fontdict={"fontsize": 10})
+    ylabels = [" ".join(x) for x in selected_behaviors]
+    max_len = len(selected_behaviors)
+    ax.set_title("Observações\n")
 
-        # time
-        obs_length = project_functions.observation_total_length(pj[OBSERVATIONS][obs_id])
-        if obs_length == -1:
-            obs_length = 0
+    ax.set_ylim(ymin=0, ymax = (max_len * par1) + par1 )
+    pos = np.arange(par1, max_len * par1 + par1 + 1, par1)
+    ax.set_yticks(pos[:len(ylabels)])
+    ax.set_yticklabels(ylabels)
 
-        if interval == TIME_FULL_OBS:
-            min_time = float(0)
-            max_time = float(obs_length)
+    ax.set_xlim(xmin = matplotlib.dates.date2num(init + dt.timedelta(seconds=float(start_time))), xmax = matplotlib.dates.date2num(init + dt.timedelta(seconds=float(end_time) + 1)))
 
-        if interval == TIME_EVENTS:
-            try:
-                min_time = float(pj[OBSERVATIONS][obs_id][EVENTS][0][0])
-            except:
-                min_time = float(0)
-            try:
-                max_time = float(pj[OBSERVATIONS][obs_id][EVENTS][-1][0])
-            except:
-                max_time = float(obs_length)
+    ax.set_yticklabels(ylabels)
+    ax.set_ylabel("Comportamentos" + " (modifiers)" * include_modifiers)
+    ax.grid(True)
+    ax.xaxis_date()
+    ax.xaxis.set_major_formatter(DateFormatter("%H:%M:%S"))
+    ax.set_xlabel("Tempo (HH:MM:SS)")
+    print('---------------------------')
+    for observation in pj[OBSERVATIONS]:
+        for subject in selected_subjects:
+            color = BEHAVIORS_PLOT_COLORS[i]
+            values = []
+            dates = []
+            for event in pj[OBSERVATIONS][observation][EVENTS]:
+                if subject in event:
+                    str = event[3]
+                    if event[5]:
+                        str = str + ' - ' + event[5]
+                    if event[4]:
+                        str = str + ' (' + event[4] + ') '
 
-        if interval == TIME_ARBITRARY_INTERVAL:
-            min_time = float(start_time)
-            max_time = float(end_time)
+                    if str in selected_behaviors:
+                        print(str)
+                        count = dt.timedelta(seconds=float(event[0]))
+                        dates.append(matplotlib.dates.date2num(init + count))
+                        values.append(selected_behaviors.index(str)+1)
 
-        ax.set_xlim(xmin = matplotlib.dates.date2num(init + dt.timedelta(seconds=min_time)), xmax = matplotlib.dates.date2num(init + dt.timedelta(seconds=max_time + 1)))
+            print(subject)
+            print(values)
+            ax.plot(dates, values, label=subject, color=color, marker='o', markerfacecolor=color)
+            i = i + 1
 
-        ax.set_yticklabels(ylabels, fontdict={"fontsize": 10})
-        ax.set_ylabel("Comportamentos" + " (modifiers)" * include_modifiers, fontdict={"fontsize": 10})
-        ax.grid(True)
-        ax.xaxis_date()
-        ax.xaxis.set_major_formatter(DateFormatter("%H:%M:%S"))
-        ax.set_xlabel("Tempo (HH:MM:SS)", fontdict={"fontsize": 12})
-        ax.invert_yaxis()
-
-        # for ax_idx in  selected_subjects:
-        #     i = 0
-        #     for event in selected_behaviors:
-        #         start_date = matplotlib.dates.date2num(init + dt.timedelta(seconds=row["start"]))
-        #         end_date = matplotlib.dates.date2num(init + dt.timedelta(seconds=row["stop"] + POINT_EVENT_PLOT_DURATION * (row["stop"] == row["start"])))
-        #         ax.barh((i * par1) + par1, end_date - start_date, left=start_date, height=bar_height, align="center", edgecolor="darkgray", color="darkgray", alpha = 1)
-        #         i += 1
-
-        fig.autofmt_xdate()
-        plt.tight_layout()
-
-        if len(selected_observations) > 1:
-            output_file_name = str(pathlib.Path(pathlib.Path(plot_directory) / utilities.safeFileName(obs_id)).with_suffix("." + file_format))
-            plt.savefig(output_file_name)
-        else:
-            plt.show()
+    fig.autofmt_xdate()
+    plt.tight_layout()
+    ax.legend()
+    if len(selected_observations) > 1:
+        output_file_name = str(pathlib.Path(pathlib.Path(plot_directory)).with_suffix("." + file_format))
+        plt.savefig(output_file_name)
+    else:
+        plt.show()
     # selected_subjects = parameters["selected subjects"]
     # selected_behaviors = parameters["selected behaviors"]
     # include_modifiers = parameters["include modifiers"]

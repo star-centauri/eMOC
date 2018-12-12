@@ -1274,7 +1274,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         show all behaviors in ethogram
         """
-        self.load_behaviors_in_twEthogram([self.pj[ETHOGRAM][x]["code"] for x in self.pj[ETHOGRAM]])
+        self.load_behaviors_in_twEthogram([self.pj[ETHOGRAM][x]["key"] for x in self.pj[ETHOGRAM]])
 
     def show_all_subjects(self):
         """
@@ -1867,7 +1867,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                         self.observationId = ""
                         self.twEvents.setRowCount(0)
                         self.menu_options()
-                        return "Error: loading observation problem"
+                        return "Erro: problema com o carregamento da observação."
 
                 if mode == "view":
                     self.playerType = VIEWER
@@ -3237,19 +3237,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         initialize new observation for VLC
         """
-
         logging.debug("Inicializar nova observação para o VLC")
 
         useMediaFromProjectDirectory = NO
 
         # if not self.check_if_media_available():
-        ok, msg = project_functions.check_if_media_available(self.pj[OBSERVATIONS][self.observationId],
-                                                             self.projectFileName)
+        ok, msg = project_functions.check_if_media_available(self.pj[OBSERVATIONS][self.observationId], self.projectFileName)
         if not ok:
-            QMessageBox.critical(self, programName, msg + ("<br><br>The observation will be opened in VIEW mode.<br>"
-                                                           "It will not be possible to log events.<br>"
-                                                           "Modify the media path to point an existing media file "
-                                                           "to log events or copy media file in the eMOC project directory."),
+            QMessageBox.critical(self, programName, msg + ("<br><br>A observação será aberta no modo VISUALIZAÇÃO.<br>"
+                                                           "Não será possível registrar eventos.<br>"
+                                                           "Modifique o caminho da mídia para apontar um arquivo de mídia existente "
+                                                           "para registrar eventos ou copiar arquivos de mídia no diretório do projeto eMOC."),
                                  QMessageBox.Ok | QMessageBox.Default,
                                  QMessageBox.NoButton)
 
@@ -3263,8 +3261,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if (len(self.pj[OBSERVATIONS][self.observationId][FILE][PLAYER1]) > 1 and
                 PLAYER2 in self.pj[OBSERVATIONS][self.observationId][FILE] and
                 self.pj[OBSERVATIONS][self.observationId][FILE][PLAYER2]):
-            QMessageBox.warning(self, programName, ("It is not yet possible to play a second media when more media"
-                                                    "are loaded in the first media player"))
+            QMessageBox.warning(self, programName, ("Ainda não é possível reproduzir uma segunda mídia quando mais mídia"
+                                                    "são carregados no primeiro media player"))
             return False
 
         self.playerType, self.playMode = VLC, VLC
@@ -3340,16 +3338,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # for mac always embed player
         if sys.platform == "darwin":  # for MacOS
             self.mediaplayer.set_nsobject(int(self.videoframe.winId()))
-
-        # check if fps changes between media
-        """
-        TODO: check
-        if FFMPEG in self.availablePlayers:
-            if len(set( self.fps.values())) != 1:
-                QMessageBox.critical(self, programName, ("The frame-by-frame mode will not be available because the "
-                "video files have different frame rates (%s).") % (", ".join([str(i) for i in list(self.fps.values())])),\
-                 QMessageBox.Ok | QMessageBox.Default, QMessageBox.NoButton)
-        """
 
         # show first frame of video
         logging.debug("playing media #{0}".format(0))
@@ -3486,11 +3474,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         if self.focusWidget():
             self.focusWidget().installEventFilter(self)
-
-        '''
-        if app.focusWidget():
-            app.focusWidget().installEventFilter(self)
-        '''
 
         # spectrogram
         if ("visualize_spectrogram" in self.pj[OBSERVATIONS][self.observationId] and
@@ -3674,12 +3657,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         row = 0
 
         for event in self.pj[OBSERVATIONS][obsId][EVENTS]:
-
+            print(event)
             for field_type in tw_events_fields:
-
                 if field_type in pj_events_fields:
-
                     field = event[pj_obs_fields[field_type]]
+
                     if field_type == "Tempo":
                         field = str(self.convertTime(field))
 
@@ -3747,8 +3729,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         """
         # check if current observation must be closed to create a new one
         if mode == NEW and self.observationId:
-            if dialog.MessageDialog(programName, "A observação atual será encerrada. Você quer continuar?",
-                                    [YES, NO]) == NO:
+            if dialog.MessageDialog(programName, "A observação atual será encerrada. Você quer continuar?", [YES, NO]) == NO:
                 return
             else:
                 self.close_observation()
@@ -4006,19 +3987,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         rv = observationWindow.exec_()
 
         if rv:
-
             self.projectChanged = True
-
             new_obs_id = observationWindow.leObservationId.text()
 
             if mode == NEW:
                 self.observationId = new_obs_id
-                self.pj[OBSERVATIONS][self.observationId] = {FILE: [], TYPE: "", "date": "", "description": "",
-                                                             "time offset": 0, "events": []}
+                self.pj[OBSERVATIONS][self.observationId] = {FILE: [], TYPE: "", "date": "", "description": "", "time offset": 0, "events": []}
 
             # check if id changed
             if mode == EDIT and new_obs_id != obsId:
-                logging.info("observation id {} changed in {}".format(obsId, new_obs_id))
+                logging.info("Observação com id {} mudou para {}".format(obsId, new_obs_id))
 
                 self.pj[OBSERVATIONS][new_obs_id] = self.pj[OBSERVATIONS][obsId]
                 del self.pj[OBSERVATIONS][obsId]
@@ -4029,26 +4007,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.pj[OBSERVATIONS][new_obs_id]["description"] = observationWindow.teDescription.toPlainText()
 
             # observation type: read project type from tab text
-            self.pj[OBSERVATIONS][new_obs_id][TYPE] = observationWindow.tabProjectType.tabText(
-                observationWindow.tabProjectType.currentIndex()).upper()
+            self.pj[OBSERVATIONS][new_obs_id][TYPE] = observationWindow.tabProjectType.tabText(observationWindow.tabProjectType.currentIndex()).upper()
 
             # independent variables for observation
             self.pj[OBSERVATIONS][new_obs_id][INDEPENDENT_VARIABLES] = {}
             for r in range(observationWindow.twIndepVariables.rowCount()):
-
                 # set dictionary as label (col 0) => value (col 2)
                 if observationWindow.twIndepVariables.item(r, 1).text() == SET_OF_VALUES:
-                    self.pj[OBSERVATIONS][new_obs_id][INDEPENDENT_VARIABLES][observationWindow.twIndepVariables.item(r,
-                                                                                                                     0).text()] = observationWindow.twIndepVariables.cellWidget(
+                    self.pj[OBSERVATIONS][new_obs_id][INDEPENDENT_VARIABLES][observationWindow.twIndepVariables.item(r, 0).text()] = observationWindow.twIndepVariables.cellWidget(
                         r, 2).currentText()
                 elif observationWindow.twIndepVariables.item(r, 1).text() == TIMESTAMP:
-                    self.pj[OBSERVATIONS][new_obs_id][INDEPENDENT_VARIABLES][observationWindow.twIndepVariables.item(r,
-                                                                                                                     0).text()] = observationWindow.twIndepVariables.cellWidget(
+                    self.pj[OBSERVATIONS][new_obs_id][INDEPENDENT_VARIABLES][observationWindow.twIndepVariables.item(r, 0).text()] = observationWindow.twIndepVariables.cellWidget(
                         r, 2).dateTime().toString(Qt.ISODate)
                 else:
-                    self.pj[OBSERVATIONS][new_obs_id][INDEPENDENT_VARIABLES][
-                        observationWindow.twIndepVariables.item(r, 0).text()] = observationWindow.twIndepVariables.item(
-                        r, 2).text()
+                    self.pj[OBSERVATIONS][new_obs_id][INDEPENDENT_VARIABLES][observationWindow.twIndepVariables.item(r, 0).text()] = observationWindow.twIndepVariables.item(r, 2).text()
 
             # observation time offset
             if self.timeFormat == HHMMSS:
@@ -4072,8 +4044,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.display_timeoffset_statubar(self.pj[OBSERVATIONS][new_obs_id][TIME_OFFSET])
 
             # visualize spectrogram
-            self.pj[OBSERVATIONS][new_obs_id][
-                "visualize_spectrogram"] = observationWindow.cbVisualizeSpectrogram.isChecked()
+            self.pj[OBSERVATIONS][new_obs_id]["visualize_spectrogram"] = observationWindow.cbVisualizeSpectrogram.isChecked()
 
             # plot data
             if observationWindow.tw_data_files.rowCount():
@@ -4098,8 +4069,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                 DATA_PLOT_FIELDS[idx2]] = observationWindow.tw_data_files.item(row, idx2).text()
 
             # cbCloseCurrentBehaviorsBetweenVideo
-            self.pj[OBSERVATIONS][new_obs_id][
-                CLOSE_BEHAVIORS_BETWEEN_VIDEOS] = observationWindow.cbCloseCurrentBehaviorsBetweenVideo.isChecked()
+            self.pj[OBSERVATIONS][new_obs_id][CLOSE_BEHAVIORS_BETWEEN_VIDEOS] = observationWindow.cbCloseCurrentBehaviorsBetweenVideo.isChecked()
 
             if self.pj[OBSERVATIONS][new_obs_id][TYPE] in [LIVE]:
                 self.pj[OBSERVATIONS][new_obs_id]["scan_sampling_time"] = observationWindow.sbScanSampling.value()
@@ -4109,7 +4079,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             # media
             if self.pj[OBSERVATIONS][new_obs_id][TYPE] in [MEDIA]:
-
                 fileName[PLAYER1] = []
                 if observationWindow.twVideo1.rowCount():
 
@@ -4136,20 +4105,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
                 logging.debug("media_info: {0}".format(self.pj[OBSERVATIONS][new_obs_id]["media_info"]))
 
-                '''
-                if not 'project_media_file_info' in self.pj:
-                    self.pj['project_media_file_info'] = {}
-
-
-                for h in observationWindow.media_file_info:
-                    self.pj['project_media_file_info'][h] = observationWindow.media_file_info[h]
-                logging.info('pj: {0}'.format(  self.pj))
-                '''
-
             # if mode == NEW:
 
-            for pyro in self.servers:
-                client_sign_up(pyro, new_obs_id, self.pj[OBSERVATIONS][new_obs_id])
+            # for pyro in self.servers:
+            #     client_sign_up(pyro, new_obs_id, self.pj[OBSERVATIONS][new_obs_id])
 
             if rv == 1:  # save
                 self.observationId = ""
@@ -4157,7 +4116,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             if rv == 2:  # start
                 self.observationId = new_obs_id
-
                 # title of dock widget
                 self.dwObservations.setWindowTitle("""Eventos para o observador "{}". """.format(self.observationId))
 
@@ -4772,7 +4730,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         returns type of event for code
         """
         for idx in self.pj[ETHOGRAM]:
-            if self.pj[ETHOGRAM][idx]['code'] == code:
+            if self.pj[ETHOGRAM][idx]['key'] == code:
                 return self.pj[ETHOGRAM][idx][TYPE]
         return None
 
@@ -4790,7 +4748,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             for event in events:
                 if (event[EVENT_SUBJECT_FIELD_IDX] in selectedSubjects or
                         (not event[EVENT_SUBJECT_FIELD_IDX] and NO_FOCAL_SUBJECT in selectedSubjects)):
-                    observed_behaviors.append(' - '.join([event[3], event[4]]))
+                    str = event[3];
+                    if event[5]:
+                        str = str + ' - ' + event[5]
+                    if event[4]:
+                        str = str + ' (' + event[4] + ') '
+                    observed_behaviors.append(str)
 
         # remove duplicate
         observed_behaviors = list(set(observed_behaviors))
@@ -7867,7 +7830,7 @@ item []:
                 newTime = Decimal(editWindow.dsbTime.value())
 
             for obs_idx in self.pj[ETHOGRAM]:
-                if self.pj[ETHOGRAM][obs_idx]["code"] == editWindow.cobCode.currentText():
+                if self.pj[ETHOGRAM][obs_idx]["key"] == editWindow.cobCode.currentText():
 
                     event = self.full_event(obs_idx)
 
@@ -8568,16 +8531,15 @@ item []:
                 self.twEthogram.setRowCount(self.twEthogram.rowCount() + 1)
                 for col in behav_fields_in_mainwindow.keys():
                     field = behav_fields_in_mainwindow[col]
-                    self.twEthogram.setItem(self.twEthogram.rowCount() - 1, field,
-                                            QTableWidgetItem(str(self.pj[ETHOGRAM][idx][col])))
+                    self.twEthogram.setItem(self.twEthogram.rowCount() - 1, field, QTableWidgetItem(str(self.pj[ETHOGRAM][idx][col])))
         if self.twEthogram.rowCount() < len(self.pj[ETHOGRAM].keys()):
             self.dwEthogram.setWindowTitle(
-                "Ethogram (filtered {0}/{1})".format(self.twEthogram.rowCount(), len(self.pj[ETHOGRAM].keys())))
+                "Etograma (filtered {0}/{1})".format(self.twEthogram.rowCount(), len(self.pj[ETHOGRAM].keys())))
 
             if self.observationId:
                 self.pj[OBSERVATIONS][self.observationId]["filtered behaviors"] = behaviorsToShow
         else:
-            self.dwEthogram.setWindowTitle("Ethogram")
+            self.dwEthogram.setWindowTitle("Etograma")
 
     def load_subjects_in_twSubjects(self, subjects_to_show):
         """
@@ -8659,23 +8621,24 @@ item []:
             memTime (Decimal): time
 
         """
-
+        print('-------------------')
+        print(event)
         logging.debug("Escrever evento - evento: {0}  enquanto isso: {1}".format(event, memTime))
+
         try:
             if event is None:
                 return
 
             # add time offset if not from editing
-            if "row" not in event:
-                memTime += Decimal(self.pj[OBSERVATIONS][self.observationId][TIME_OFFSET]).quantize(Decimal(".001"))
+            # if "row" not in event:
+            #     memTime += Decimal(self.pj[OBSERVATIONS][self.observationId][TIME_OFFSET]).quantize(Decimal(".001"))
 
             # check if a same event is already in events list (time, subject, code)
             # "row" present in case of event editing
 
             if "row" not in event and self.checkSameEvent(self.observationId, memTime, self.currentSubject,
                                                           event["key"]):
-                _ = dialog.MessageDialog(programName,
-                                         "O mesmo evento já existe (mesmo tempo, código de comportamento e assunto).", [OK])
+                _ = dialog.MessageDialog(programName, "O mesmo evento já existe (mesmo tempo, código de comportamento e assunto).", [OK])
                 return
 
             if not "from map" in event:  # modifiers only for behaviors without coding map
@@ -8770,11 +8733,11 @@ item []:
             # add event to pj
             if "row" in event:
                 # modifying event
-                self.pj[OBSERVATIONS][self.observationId][EVENTS][event["row"]] = [memTime, subject, event["key"], event[TYPE], modifier_str, comment]
+                self.pj[OBSERVATIONS][self.observationId][EVENTS][event["row"]] = [memTime, subject, event["key"], event[TYPE], modifier_str, event['category']]
             else:
                 # add event
                 self.pj[OBSERVATIONS][self.observationId][EVENTS].append(
-                    [memTime, subject, event["key"], event[TYPE], modifier_str, comment])
+                    [memTime, subject, event["key"], event[TYPE], modifier_str, event["category"]])
 
             # sort events in pj
             self.pj[OBSERVATIONS][self.observationId][EVENTS].sort()
@@ -8807,7 +8770,7 @@ item []:
         for idx in self.pj[ETHOGRAM]:
             if self.pj[ETHOGRAM][idx]["key"] == obs_key:
 
-                code_descr = self.pj[ETHOGRAM][idx]["code"]
+                code_descr = self.pj[ETHOGRAM][idx]["key"]
                 if self.pj[ETHOGRAM][idx]["description"]:
                     code_descr += " - " + self.pj[ETHOGRAM][idx]["description"]
                 items.append(code_descr)
