@@ -7307,14 +7307,14 @@ item []:
                     if idx % 2 == 0:
 
                         # check if events not interlacced
-                        if row["code"] != rows[idx + 1]["code"]:
+                        if row["key"] != rows[idx + 1]["key"]:
                             QMessageBox.critical(None, programName,
                                                  "The events are interlaced. It is not possible to produce the Praat TextGrid file",
                                                  QMessageBox.Ok | QMessageBox.Default, QMessageBox.NoButton)
                             return
 
                         count += 1
-                        out += template.format(count=count, name=row["code"], xmin=row["occurence"],
+                        out += template.format(count=count, name=row["key"], xmin=row["occurence"],
                                                xmax=rows[idx + 1]["occurence"])
 
                         # check if difference is > 0.001
@@ -8026,7 +8026,7 @@ item []:
                     newTime = Decimal(str(editWindow.dsbTime.value()))
 
                 for key in self.pj[ETHOGRAM]:
-                    if self.pj[ETHOGRAM][key]["code"] == editWindow.cobCode.currentText():
+                    if self.pj[ETHOGRAM][key]["key"] == editWindow.cobCode.currentText():
                         event = self.full_event(key)
                         event["subject"] = editWindow.cobSubject.currentText()
                         event["comment"] = editWindow.leComment.toPlainText()
@@ -8621,8 +8621,6 @@ item []:
             memTime (Decimal): time
 
         """
-        print('-------------------')
-        print(event)
         logging.debug("Escrever evento - evento: {0}  enquanto isso: {1}".format(event, memTime))
 
         try:
@@ -8630,8 +8628,8 @@ item []:
                 return
 
             # add time offset if not from editing
-            # if "row" not in event:
-            #     memTime += Decimal(self.pj[OBSERVATIONS][self.observationId][TIME_OFFSET]).quantize(Decimal(".001"))
+            if "row" not in event:
+                 memTime += Decimal(self.pj[OBSERVATIONS][self.observationId][TIME_OFFSET]).quantize(Decimal(".001"))
 
             # check if a same event is already in events list (time, subject, code)
             # "row" present in case of event editing

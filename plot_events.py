@@ -529,61 +529,80 @@ def create_events_plot2_new(pj, #projeto atual
     bar_height = 0.5
     init = dt.datetime(2017, 1, 1)
     par1 = 1
-    i = 0
+
+    selected_observations.sort()
     selected_behaviors.sort()
 
-    fig, ax = plt.subplots(figsize=(20, 8), nrows=1, ncols=1, sharex=True)
+    if len(selected_observations) > 1:
+        fig, axs = plt.subplots(figsize=(20, 8), nrows=len(selected_observations), sharex=True)
+    else:
+        fig, ax = plt.subplots(figsize=(20, 8), nrows=1, ncols=1, sharex=True)
 
-    ylabels = [" ".join(x) for x in selected_behaviors]
-    max_len = len(selected_behaviors)
-    ax.set_title("Observações\n")
+    for observation in selected_observations:
+        i = 0
+        if len(selected_observations) > 1:
+            ax = axs[selected_observations.index(observation)]
 
-    ax.set_ylim(ymin=0, ymax = (max_len * par1) + par1 )
-    pos = np.arange(par1, max_len * par1 + par1 + 1, par1)
-    ax.set_yticks(pos[:len(ylabels)])
-    ax.set_yticklabels(ylabels)
+        ylabels = [" ".join(x) for x in selected_behaviors]
+        max_len = len(selected_behaviors)
+        ax.set_title("Observação {}\n".format(observation))
 
-    ax.set_xlim(xmin = matplotlib.dates.date2num(init + dt.timedelta(seconds=float(start_time))), xmax = matplotlib.dates.date2num(init + dt.timedelta(seconds=float(end_time) + 1)))
+        ax.set_ylim(ymin=0, ymax = (max_len * par1) + par1 )
+        pos = np.arange(par1, max_len * par1 + par1 + 1, par1)
+        ax.set_yticks(pos[:len(ylabels)])
+        ax.set_yticklabels(ylabels)
 
-    ax.set_yticklabels(ylabels)
-    ax.set_ylabel("Comportamentos" + " (modifiers)" * include_modifiers)
-    ax.grid(True)
-    ax.xaxis_date()
-    ax.xaxis.set_major_formatter(DateFormatter("%H:%M:%S"))
-    ax.set_xlabel("Tempo (HH:MM:SS)")
-    print('---------------------------')
-    for observation in pj[OBSERVATIONS]:
+        ax.set_xlim(xmin = matplotlib.dates.date2num(init + dt.timedelta(seconds=float(start_time))), xmax = matplotlib.dates.date2num(init + dt.timedelta(seconds=float(end_time) + 1)))
+
+        ax.set_yticklabels(ylabels)
+        ax.set_ylabel("Comportamentos" + " (modifiers)" * include_modifiers)
+        ax.grid(True)
+        ax.xaxis_date()
+        ax.xaxis.set_major_formatter(DateFormatter("%H:%M:%S"))
+        ax.set_xlabel("Tempo (HH:MM:SS)")
+
         for subject in selected_subjects:
             color = BEHAVIORS_PLOT_COLORS[i]
             values = []
             dates = []
             for event in pj[OBSERVATIONS][observation][EVENTS]:
-                if subject in event:
-                    str = event[3]
-                    if event[5]:
-                        str = str + ' - ' + event[5]
-                    if event[4]:
-                        str = str + ' (' + event[4] + ') '
+                print('-------------------------------')
 
-                    if str in selected_behaviors:
-                        print(str)
-                        count = dt.timedelta(seconds=float(event[0]))
-                        dates.append(matplotlib.dates.date2num(init + count))
-                        values.append(selected_behaviors.index(str)+1)
+                if subject == "No focal subject":
+                    print(subject)
+                    if event[1] == "":
+                        str = event[3]
+                        if event[5]:
+                            str = str + ' - ' + event[5]
+                        if event[4]:
+                            str = str + ' (' + event[4] + ') '
 
-            print(subject)
-            print(values)
+                        if str in selected_behaviors:
+                            print(str)
+                            count = dt.timedelta(seconds=float(event[0]))
+                            dates.append(matplotlib.dates.date2num(init + count))
+                            values.append(selected_behaviors.index(str)+1)
+                else:
+                    if subject in event:
+                        str = event[3]
+                        if event[5]:
+                            str = str + ' - ' + event[5]
+                        if event[4]:
+                            str = str + ' (' + event[4] + ') '
+
+                        if str in selected_behaviors:
+                            print(str)
+                            count = dt.timedelta(seconds=float(event[0]))
+                            dates.append(matplotlib.dates.date2num(init + count))
+                            values.append(selected_behaviors.index(str)+1)
+
             ax.plot(dates, values, label=subject, color=color, marker='o', markerfacecolor=color)
             i = i + 1
+        ax.legend()
 
     fig.autofmt_xdate()
     plt.tight_layout()
-    ax.legend()
-    if len(selected_observations) > 1:
-        output_file_name = str(pathlib.Path(pathlib.Path(plot_directory)).with_suffix("." + file_format))
-        plt.savefig(output_file_name)
-    else:
-        plt.show()
+    plt.show()
     # selected_subjects = parameters["selected subjects"]
     # selected_behaviors = parameters["selected behaviors"]
     # include_modifiers = parameters["include modifiers"]
